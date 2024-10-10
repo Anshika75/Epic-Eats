@@ -5,8 +5,8 @@ export interface RecipeType {
     calories: number | string;
     ingredients: {
         name: string;
-        amount: number | string;
-    }
+        amount: string;
+    }[];
     type: 'veg' | 'non-veg';
     cuisine: string;
     steps: string[];  // array of strings
