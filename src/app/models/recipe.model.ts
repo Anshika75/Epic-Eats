@@ -17,4 +17,4 @@ export interface RecipeType {
     tags: string[];  // New field: an array of tags for additional categorization
 }
 
-// card: name, image, calories, date, type, ciuisine, serves, time taken, tags, delete, favourite, view
+// card: name, image, calories, date, type, cuisine, serves, time taken, tags, delete, favourite, view
