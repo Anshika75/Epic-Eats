@@ -1,0 +1,21 @@
+.filter-box{
+    height: 100%;
+    width: 100%;
+}
+
+.filter-tag{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 7px 0px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+h3{
+    font-size: 1.4rem;
+    color: #cc5939;
+    margin: 10px 0px;
+}
