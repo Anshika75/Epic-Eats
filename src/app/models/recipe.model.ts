@@ -16,3 +16,5 @@ export interface RecipeType {
     timeTaken: string;  // New field: to specify the total time taken
     tags: string[];  // New field: an array of tags for additional categorization
 }
+
+// card: name, image, calories, date, type, ciuisine, serves, time taken, tags, delete, favourite, view
