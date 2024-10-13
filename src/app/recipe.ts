@@ -22,7 +22,11 @@ export const RecipeData: RecipeType[] = [
       'Stir in tomato sauce and let it simmer for 15 minutes.',
       'Serve the sauce over the spaghetti.'
     ],
-    date: new Date('2024-01-01')
+    date: new Date('2024-01-01'),
+    favourite: true, // New field
+    serves: 4, // New field
+    timeTaken: '30 minutes', // New field
+    tags: ['Pasta', 'Main Course'] // New field
   },
   {
     id: 'r2',
@@ -45,7 +49,11 @@ export const RecipeData: RecipeType[] = [
       'Add soy sauce and cook for another 2 minutes.',
       'Serve hot with rice or noodles.'
     ],
-    date: new Date('2024-02-15')
+    date: new Date('2024-02-15'),
+    favourite: false, // New field
+    serves: 2, // New field
+    timeTaken: '15 minutes', // New field
+    tags: ['Healthy', 'Quick', 'Vegetarian'] // New field
   },
   {
     id: 'r3',
@@ -68,7 +76,11 @@ export const RecipeData: RecipeType[] = [
       'Pour in coconut milk and simmer for 20 minutes.',
       'Serve with rice or naan.'
     ],
-    date: new Date('2024-03-10')
+    date: new Date('2024-03-10'),
+    favourite: true, // New field
+    serves: 4, // New field
+    timeTaken: '40 minutes', // New field
+    tags: ['Spicy', 'Comfort Food', 'Dinner'] // New field
   },
   {
     id: 'r4',
@@ -90,6 +102,10 @@ export const RecipeData: RecipeType[] = [
       'Drizzle with lemon juice and toss to combine.',
       'Chill in the fridge for 20 minutes before serving.'
     ],
-    date: new Date('2024-04-05')
+    date: new Date('2024-04-05'),
+    favourite: false, // New field
+    serves: 2, // New field
+    timeTaken: '25 minutes', // New field
+    tags: ['Salad', 'Healthy', 'Vegetarian'] // New field
   }
 ];
