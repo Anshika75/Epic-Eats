@@ -5,7 +5,9 @@ main{
     align-items: center;
     height: 100vh;
     width: 100%;
-    background-color: #fafcfe;   
+    background-color: #fafcfe;  
+     /*gradient bg  */
+    background: linear-gradient(180deg, #dec8c0 0%, #e4d8bc 100%);
     padding: 0 120px;
 }
 section{
@@ -33,3 +35,4 @@ section .tag-box{
 section .quote-main{
     width: 100%;
 }
+
