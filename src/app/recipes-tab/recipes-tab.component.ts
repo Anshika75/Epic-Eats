@@ -15,5 +15,6 @@ export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
   onDeleteRecipe(recipeId: string) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
+    console.log('Recipe deleted');
   }
 }
