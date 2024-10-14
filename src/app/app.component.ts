@@ -15,8 +15,6 @@ import { RecipesTabComponent } from './recipes-tab/recipes-tab.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'epiceats';
-
   // Recipe data
   recipes: RecipeType[] = RecipeData;
   cuisines: CuisineType[] = CuisineData;
@@ -42,32 +40,32 @@ export class AppComponent {
 
   filterRecipes() {
     if(this.cuisine === 1 && this.dietary === 1) {
-      return this.filteredRecipes = this.recipes.filter(recipe => 
+       this.filteredRecipes = this.recipes.filter(recipe => 
         (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
         (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
       );
     } else if(this.cuisine === 1 && this.dietary === 0) {
-      return this.filteredRecipes = this.recipes.filter(recipe => 
+       this.filteredRecipes = this.recipes.filter(recipe => 
         recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name
       );
     } else if(this.cuisine === 0 && this.dietary === 1) {
-      return this.filteredRecipes = this.recipes.filter(recipe => 
+       this.filteredRecipes = this.recipes.filter(recipe => 
         (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg')
       );
     } else{
-      return this.filteredRecipes = [...this.recipes];
+       this.filteredRecipes = [...this.recipes];
     }
 
   }
 
   clearAllFilters() {
-    this.selectedCuisineTagId = ''; // Reset to default
-    this.selectedDietaryTagId = ''; // Reset to default
-    this.filteredRecipes = [...this.recipes]; // Show all recipes
+    this.selectedCuisineTagId = ''; 
+    this.selectedDietaryTagId = ''; 
+    this.filteredRecipes = [...this.recipes];
   }
 
   onDeleteRecipe(recipeId: any) {
     console.log('Delete in AppComponent for recipe ID:', recipeId)
-    return this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId); 
+    this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId); 
   }
 }
