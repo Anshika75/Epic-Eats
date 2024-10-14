@@ -19,11 +19,12 @@ export class AppComponent {
 
   // Recipe data
   recipes: RecipeType[] = RecipeData;
+  cuisines: CuisineType[] = CuisineData;
   filteredRecipes: RecipeType[] = [...this.recipes]; // Start with all recipes
 
   // Filter states
-  selectedCuisineTagId = '1'; // Default cuisine filter
-  selectedDietaryTagId = '1'; // Default dietary filter
+  selectedCuisineTagId = ''; // Default cuisine filter
+  selectedDietaryTagId = ''; // Default dietary filter
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
@@ -38,7 +39,7 @@ export class AppComponent {
   filterRecipes() {
     this.filteredRecipes = this.recipes.filter(recipe => 
       (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
-      (recipe.cuisine === this.selectedCuisineTagId)
+      (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
     );
   }
 }

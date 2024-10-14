@@ -14,8 +14,8 @@ import { RecipeService } from '../service/recipe.service';
 export class FiltersTabComponent {
   dietaryTypes = [{ id: '1', name: 'Veg' }, { id: '2', name: 'Non-Veg' }];
   cuisines: CuisineType[] = CuisineData; 
-  selectedCuisineTagId = '1';
-  selectedDietaryTagId = '1';
+  selectedCuisineTagId = '';
+  selectedDietaryTagId = '';
 
   @Output() tagSelectedCuisine = new EventEmitter<string>();
   @Output() tagSelectedDietary = new EventEmitter<string>();
