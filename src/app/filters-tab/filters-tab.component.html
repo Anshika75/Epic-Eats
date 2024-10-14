@@ -2,14 +2,14 @@
     <h3 class="inter-bold">Dietary Preference</h3>
     <div class="filter-tag">
         @for(dietarytype of dietaryTypes; track dietarytype.id ){
-            <app-tag [tag]="dietarytype.name"></app-tag>  
+            <app-tag [selected]="dietarytype.id === selectedTagId" [tag]="dietarytype.name" (tagSelected)="onSelectedTag($event)"></app-tag>  
          } 
     </div>
     <h3 class="inter-bold">Cuisine Preference</h3>
     <div class="filter-tag">
         <!-- <app-tag></app-tag> -->
          @for(cuisines of cuisines; track cuisines.id ){
-            <app-tag [tag]="cuisines.name"></app-tag>  
+            <app-tag  [selected]="cuisines.id === selectedTagId" [tag]="cuisines.name" (tagSelected)="onSelectedTag($event)"></app-tag>  
          }
     </div>
 </div>

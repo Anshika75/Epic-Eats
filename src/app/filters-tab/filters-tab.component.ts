@@ -11,6 +11,14 @@ import { CuisineData } from '../data/cuisine';
   styleUrl: './filters-tab.component.css'
 })
 export class FiltersTabComponent {
-  dietaryTypes = [{ id: 'veg', name: 'Veg' }, { id: 'non-veg', name: 'Non-Veg' }];
+  dietaryTypes = [{ id: '1', name: 'Veg' }, { id: '2', name: 'Non-Veg' }];
   cuisines: CuisineType[] = CuisineData; 
+  selectedTagId = '1';
+    // get selectedTag() {
+    //   return this.cuisines.find(cuisines => cuisines.id === this.selectedTagId);
+    // }
+    onSelectedTag(tagId: string) {
+      this.selectedTagId = tagId;
+      console.log('Selected Tag:', tagId);
+    }
 }

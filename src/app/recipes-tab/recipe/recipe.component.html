@@ -1,6 +1,6 @@
 <div class="recipe-card">
     <div class="img-box">
-        <img src="https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D" alt="Recipe">
+        <img [src]="recipe.imagePath" [alt]="recipe.name" >
         <div class="overlay"></div>
         <div class="tag poppins-regular">{{recipe.imgTag}}</div>
         <button class="fav">
@@ -8,7 +8,7 @@
         </button>
         <div class="txt">
             <h3 class="inter-semibold">{{recipe.name}} 
-                <div class="circle non-veg">
+                <div class="circle non-veg" [ngClass]="{'veg': recipe.type === 'veg', 'non-veg': recipe.type === 'non-veg'}">
                     <i class="fa-solid fa-circle"></i>
                 </div>
             </h3>
@@ -20,21 +20,21 @@
             <div class="col">
                 <div class="data cal">
                     <i class="fa-solid fa-fire"></i>
-                    <p class="poppins-light">{{recipe.calories}}</p>
+                    <p class="poppins-light">{{recipe.calories}} cals</p>
                 </div>
                 <div class="data time">
                     <i class="fa-solid fa-clock"></i>
-                    <p class="poppins-light">{{recipe.time}}</p>
+                    <p class="poppins-light">{{recipe.timeTaken}}</p>
                 </div>
             </div>
             <div class="col">
                 <div class="data">
                     <i class="fa-solid fa-utensils"></i>
-                    <p class="poppins-light">{{recipe.servings}}</p>
+                    <p class="poppins-light">{{recipe.serves}} serves</p>
                 </div>
                 <div class="data">
                     <i class="fa-solid fa-calendar"></i>
-                    <p class="poppins-light">{{recipe.date}}</p>
+                    <p class="poppins-light">{{recipe.date | date:'shortDate'}}</p>
                 </div>
             </div> 
         </div>

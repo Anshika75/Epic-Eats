@@ -4,7 +4,7 @@ export const RecipeData: RecipeType[] = [
   {
     id: 'r1',
     name: 'Spaghetti Bolognese',
-    imagePath: 'https://example.com/spaghetti-bolognese.jpg',
+    imagePath: 'https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D',
     calories: 350,
     description: 'A classic Italian pasta dish with a rich and savory meat sauce served over spaghetti.',
     ingredients: [
@@ -26,14 +26,14 @@ export const RecipeData: RecipeType[] = [
     date: new Date('2024-01-01'),
     favourite: true,
     serves: 4,
-    timeTaken: '30 minutes',
-    tags: ['Pasta', 'Main Course'],
-    imgTag: 'Main Course'
+    timeTaken: '30 mins',
+    tags: ['Pasta', 'Sides'],
+    imgTag: 'Breakfast'
   },
   {
     id: 'r2',
     name: 'Vegetable Stir Fry',
-    imagePath: 'https://example.com/vegetable-stir-fry.jpg',
+    imagePath: 'https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D',
     calories: '200-250',
     description: 'A quick and healthy Chinese stir-fry packed with colorful vegetables and soy sauce.',
     ingredients: [
@@ -55,14 +55,14 @@ export const RecipeData: RecipeType[] = [
     date: new Date('2024-02-15'),
     favourite: false,
     serves: 2,
-    timeTaken: '15 minutes',
+    timeTaken: '15 mins',
     tags: ['Healthy', 'Quick', 'Vegetarian'],
     imgTag: 'Main Course'
   },
   {
     id: 'r3',
     name: 'Chicken Curry',
-    imagePath: 'https://example.com/chicken-curry.jpg',
+    imagePath: 'https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D',
     calories: 500,
     description: 'A flavorful Indian curry with tender chicken pieces simmered in coconut milk and spices.',
     ingredients: [
@@ -84,14 +84,14 @@ export const RecipeData: RecipeType[] = [
     date: new Date('2024-03-10'),
     favourite: true,
     serves: 4,
-    timeTaken: '40 minutes',
+    timeTaken: '40 mins',
     tags: ['Spicy', 'Comfort Food', 'Dinner'],
     imgTag: 'Main Course'
   },
   {
     id: 'r4',
     name: 'Quinoa Salad',
-    imagePath: 'https://example.com/quinoa-salad.jpg',
+    imagePath: 'https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D',
     calories: 300,
     description: 'A light and refreshing Mediterranean quinoa salad with cucumber, cherry tomatoes, and feta cheese.',
     ingredients: [
@@ -112,7 +112,7 @@ export const RecipeData: RecipeType[] = [
     date: new Date('2024-04-05'),
     favourite: false,
     serves: 2,
-    timeTaken: '25 minutes',
+    timeTaken: '25 mins',
     tags: ['Salad', 'Healthy', 'Vegetarian'],
     imgTag: 'Snacks'
   }
