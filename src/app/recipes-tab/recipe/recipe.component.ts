@@ -18,7 +18,7 @@ export class RecipeComponent {
   // @Input() time = '30 min';
   // @Input() servings = '4 servings';
   // @Input() date = '12/11/21';
-  @Output() deleteRecipe = new EventEmitter<number>();
+  @Output() deleteRecipe = new EventEmitter<string>();
   @Input() recipe: any;
 
   onDelete() {
