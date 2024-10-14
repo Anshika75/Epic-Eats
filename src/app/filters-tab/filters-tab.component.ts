@@ -19,6 +19,7 @@ export class FiltersTabComponent {
 
   @Output() tagSelectedCuisine = new EventEmitter<string>();
   @Output() tagSelectedDietary = new EventEmitter<string>();
+  @Output() filtersCleared = new EventEmitter<void>();
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
@@ -28,5 +29,10 @@ export class FiltersTabComponent {
   onSelectedDietaryTag(tagId: string) {
     this.selectedDietaryTagId = tagId;
     this.tagSelectedDietary.emit(tagId); // Emit selected dietary preference
+  }
+  onClearFilters() {
+    this.selectedCuisineTagId = ''; // Reset to default
+    this.selectedDietaryTagId = ''; // Reset to default
+    this.filtersCleared.emit(); // Emit event to clear filters in the parent
   }
 }

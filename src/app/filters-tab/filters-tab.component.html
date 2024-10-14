@@ -12,4 +12,8 @@
             <app-tag  [selected]="cuisines.id === selectedCuisineTagId" [tag]="cuisines" (tagSelected)="onSelectedCuisineTag($event)"></app-tag>  
          }
     </div>
+
+    <button class="clr-btn" (click)="onClearFilters()">
+        <span class="inter-bold">Clear All</span>
+    </button>
 </div>

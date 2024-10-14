@@ -4,7 +4,8 @@
     <div class="tag-box">
       <app-filters-tab 
         (tagSelectedCuisine)="onSelectedCuisineTag($event)" 
-        (tagSelectedDietary)="onSelectedDietaryTag($event)">
+        (tagSelectedDietary)="onSelectedDietaryTag($event)"
+        (filtersCleared)="clearAllFilters()">
       </app-filters-tab>
     </div>
     <div class="recipe-main">

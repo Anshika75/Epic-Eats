@@ -30,14 +30,14 @@ export class AppComponent {
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
-    this.filterRecipes();
     this.cuisine = 1;
+    this.filterRecipes();
   }
 
   onSelectedDietaryTag(tagId: string) {
     this.selectedDietaryTagId = tagId;
-    this.filterRecipes();
     this.dietary = 1;
+    this.filterRecipes();
   }
 
   filterRecipes() {
@@ -58,6 +58,11 @@ export class AppComponent {
       return this.filteredRecipes = [...this.recipes];
     }
 
+  }
 
+  clearAllFilters() {
+    this.selectedCuisineTagId = ''; // Reset to default
+    this.selectedDietaryTagId = ''; // Reset to default
+    this.filteredRecipes = [...this.recipes]; // Show all recipes
   }
 }
