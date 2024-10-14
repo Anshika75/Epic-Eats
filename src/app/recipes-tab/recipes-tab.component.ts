@@ -15,6 +15,7 @@ export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
   @Output() deleteRecipe = new EventEmitter<string>();
   onDeleteRecipe(recipeId: string) { 
+    console.log('Delete event received for recipe ID:', recipeId);
     this.deleteRecipe.emit(recipeId); // Emit the recipe ID to the parent
   }
 }

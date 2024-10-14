@@ -22,6 +22,7 @@ export class RecipeComponent {
   @Input() recipe: any;
 
   onDelete() {
+    console.log('Delete clicked for recipe:', this.recipe.id);
     this.deleteRecipe.emit(this.recipe.id); // Emit the recipe ID to the parent
   }
 
