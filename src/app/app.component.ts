@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
   filterRecipes() {
-    if(this.cuisine === 1 || this.dietary === 1) {
+    if(this.cuisine === 1 && this.dietary === 1) {
       return this.filteredRecipes = this.recipes.filter(recipe => 
         (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
         (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
@@ -58,6 +58,6 @@ export class AppComponent {
       return this.filteredRecipes = [...this.recipes];
     }
 
-      
+
   }
 }
