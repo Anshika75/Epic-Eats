@@ -14,7 +14,7 @@ import { RecipeService } from '../service/recipe.service';
 export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
   @Output() deleteRecipe = new EventEmitter<string>();
-  onDeleteRecipe(recipeId: string) {
+  onDeleteRecipe(recipeId: string) { 
     this.deleteRecipe.emit(recipeId); // Emit the recipe ID to the parent
   }
 }
