@@ -15,9 +15,6 @@ export class FiltersTabComponent {
   dietaryTypes = [{ id: '1', name: 'Veg' }, { id: '2', name: 'Non-Veg' }];
   cuisines: CuisineType[] = CuisineData; 
   selectedCuisineTagId = '1';
-    // get selectedTag() {
-    //   return this.cuisines.find(cuisines => cuisines.id === this.selectedTagId);
-    // }
     onSelectedCuisineTag(tagId: string) {
       this.selectedCuisineTagId = tagId;
     }
