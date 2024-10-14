@@ -9,7 +9,7 @@
       </app-filters-tab>
     </div>
     <div class="recipe-main">
-      <app-recipes-tab [recipes]="filteredRecipes"></app-recipes-tab>
+      <app-recipes-tab [recipes]="filteredRecipes" (deleteRecipe)="onDeleteRecipe($event)"></app-recipes-tab>
     </div>
   </section>
 </main>

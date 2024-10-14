@@ -13,4 +13,7 @@ import { RecipeService } from '../service/recipe.service';
 })
 export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
+  onDeleteRecipe(recipeId: number) {
+    this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId.toString());
+  }
 }

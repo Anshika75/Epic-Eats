@@ -65,4 +65,9 @@ export class AppComponent {
     this.selectedDietaryTagId = ''; // Reset to default
     this.filteredRecipes = [...this.recipes]; // Show all recipes
   }
+
+  onDeleteRecipe(recipeId: any) {
+    this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId.toString()); // Remove from main recipe list
+    // this.filterRecipes(); // Reapply filters after deletion
+  }
 }

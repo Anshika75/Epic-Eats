@@ -1,5 +1,5 @@
 <div class="recipe-box">
     @for(recipe of recipes; track recipe.id){
-        <app-recipe [recipe]="recipe"></app-recipe>
+        <app-recipe [recipe]="recipe" (deleteRecipe)="onDeleteRecipe($event)"></app-recipe>
     }
 </div>

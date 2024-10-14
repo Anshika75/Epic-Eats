@@ -1,5 +1,5 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, DatePipe, } from '@angular/common';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-recipe',
@@ -18,12 +18,15 @@ export class RecipeComponent {
   // @Input() time = '30 min';
   // @Input() servings = '4 servings';
   // @Input() date = '12/11/21';
-
+  @Output() deleteRecipe = new EventEmitter<number>();
   @Input() recipe: any;
 
-  
+  onDelete() {
+    this.deleteRecipe.emit(this.recipe.id); // Emit the recipe ID to the parent
+  }
+
   trimDescription(description: string): string {
     return description.length > 70 ? description.substring(0, 70) + '...' : description;
-  }
+  } 
 }
 
