@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RecipeComponent } from "./recipe/recipe.component";
 import { RecipeType } from '../models/recipe.model';
 import { RecipeData } from '../data/recipe';
@@ -12,6 +12,5 @@ import { RecipeService } from '../service/recipe.service';
   styleUrl: './recipes-tab.component.css'
 })
 export class RecipesTabComponent {
-  recipes: RecipeType[] = RecipeData;
-  
+  @Input() recipes: RecipeType[] = [];
 }

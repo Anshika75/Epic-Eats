@@ -1,11 +1,14 @@
 <main>
   <app-header></app-header>
   <section>
-   <div class="tag-box">
-    <app-filters-tab></app-filters-tab>
-   </div>
-   <div class="recipe-main">
-    <app-recipes-tab></app-recipes-tab>
-   </div>
+    <div class="tag-box">
+      <app-filters-tab 
+        (tagSelectedCuisine)="onSelectedCuisineTag($event)" 
+        (tagSelectedDietary)="onSelectedDietaryTag($event)">
+      </app-filters-tab>
+    </div>
+    <div class="recipe-main">
+      <app-recipes-tab [recipes]="filteredRecipes"></app-recipes-tab>
+    </div>
   </section>
 </main>
