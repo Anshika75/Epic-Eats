@@ -1,11 +1,12 @@
 import { RecipeType } from "../models/recipe.model";
 
-export const RecipeData: RecipeType[] = [
+export const RecipeData: RecipeType[] = [ 
   {
     id: 'r1',
     name: 'Spaghetti Bolognese',
     imagePath: 'https://example.com/spaghetti-bolognese.jpg',
     calories: 350,
+    description: 'A classic Italian pasta dish with a rich and savory meat sauce served over spaghetti.',
     ingredients: [
       { name: 'Spaghetti', amount: '200g' },
       { name: 'Ground Beef', amount: '300g' },
@@ -23,16 +24,18 @@ export const RecipeData: RecipeType[] = [
       'Serve the sauce over the spaghetti.'
     ],
     date: new Date('2024-01-01'),
-    favourite: true, // New field
-    serves: 4, // New field
-    timeTaken: '30 minutes', // New field
-    tags: ['Pasta', 'Main Course'] // New field
+    favourite: true,
+    serves: 4,
+    timeTaken: '30 minutes',
+    tags: ['Pasta', 'Main Course'],
+    imgTag: 'Main Course'
   },
   {
     id: 'r2',
     name: 'Vegetable Stir Fry',
     imagePath: 'https://example.com/vegetable-stir-fry.jpg',
     calories: '200-250',
+    description: 'A quick and healthy Chinese stir-fry packed with colorful vegetables and soy sauce.',
     ingredients: [
       { name: 'Broccoli', amount: '1 cup' },
       { name: 'Carrots', amount: '1/2 cup, sliced' },
@@ -50,16 +53,18 @@ export const RecipeData: RecipeType[] = [
       'Serve hot with rice or noodles.'
     ],
     date: new Date('2024-02-15'),
-    favourite: false, // New field
-    serves: 2, // New field
-    timeTaken: '15 minutes', // New field
-    tags: ['Healthy', 'Quick', 'Vegetarian'] // New field
+    favourite: false,
+    serves: 2,
+    timeTaken: '15 minutes',
+    tags: ['Healthy', 'Quick', 'Vegetarian'],
+    imgTag: 'Main Course'
   },
   {
     id: 'r3',
     name: 'Chicken Curry',
     imagePath: 'https://example.com/chicken-curry.jpg',
     calories: 500,
+    description: 'A flavorful Indian curry with tender chicken pieces simmered in coconut milk and spices.',
     ingredients: [
       { name: 'Chicken', amount: '500g' },
       { name: 'Onion', amount: '1, chopped' },
@@ -77,16 +82,18 @@ export const RecipeData: RecipeType[] = [
       'Serve with rice or naan.'
     ],
     date: new Date('2024-03-10'),
-    favourite: true, // New field
-    serves: 4, // New field
-    timeTaken: '40 minutes', // New field
-    tags: ['Spicy', 'Comfort Food', 'Dinner'] // New field
+    favourite: true,
+    serves: 4,
+    timeTaken: '40 minutes',
+    tags: ['Spicy', 'Comfort Food', 'Dinner'],
+    imgTag: 'Main Course'
   },
   {
     id: 'r4',
     name: 'Quinoa Salad',
     imagePath: 'https://example.com/quinoa-salad.jpg',
     calories: 300,
+    description: 'A light and refreshing Mediterranean quinoa salad with cucumber, cherry tomatoes, and feta cheese.',
     ingredients: [
       { name: 'Quinoa', amount: '1 cup' },
       { name: 'Cucumber', amount: '1/2 cup, diced' },
@@ -103,9 +110,10 @@ export const RecipeData: RecipeType[] = [
       'Chill in the fridge for 20 minutes before serving.'
     ],
     date: new Date('2024-04-05'),
-    favourite: false, // New field
-    serves: 2, // New field
-    timeTaken: '25 minutes', // New field
-    tags: ['Salad', 'Healthy', 'Vegetarian'] // New field
+    favourite: false,
+    serves: 2,
+    timeTaken: '25 minutes',
+    tags: ['Salad', 'Healthy', 'Vegetarian'],
+    imgTag: 'Snacks'
   }
 ];

@@ -1,7 +1,5 @@
 <div class="recipe-box">
-    <app-recipe></app-recipe>
-    <app-recipe></app-recipe>
-    <app-recipe></app-recipe>
-    <app-recipe></app-recipe>
-    <app-recipe></app-recipe>
+    @for(recipe of recipes; track recipe.id){
+        <app-recipe [recipe]="recipe"></app-recipe>
+    }
 </div>

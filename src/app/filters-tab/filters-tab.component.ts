@@ -12,5 +12,5 @@ import { CuisineData } from '../data/cuisine';
 })
 export class FiltersTabComponent {
   dietaryTypes = [{ id: 'veg', name: 'Veg' }, { id: 'non-veg', name: 'Non-Veg' }];
-  cuisines: CuisineType[] = CuisineData;
+  cuisines: CuisineType[] = CuisineData; 
 }

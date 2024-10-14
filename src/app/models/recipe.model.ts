@@ -1,6 +1,7 @@
 export interface RecipeType {
     id: string;
     name: string;
+    description: string;
     imagePath: string;
     calories: number | string;
     ingredients: {
@@ -15,6 +16,5 @@ export interface RecipeType {
     serves: number;  // New field: to specify how many people the recipe serves
     timeTaken: string;  // New field: to specify the total time taken
     tags: string[];  // New field: an array of tags for additional categorization
+    imgTag: string;  // New field: to specify the type of image
 }
-
-// card: name, image, calories, date, type, cuisine, serves, time taken, tags, delete, favourite, view
