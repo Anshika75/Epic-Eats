@@ -67,7 +67,7 @@ export class AppComponent {
   }
 
   onDeleteRecipe(recipeId: any) {
-    this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId.toString()); // Remove from main recipe list
+    this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId.toString()); // Remove from main recipe list
     // this.filterRecipes(); // Reapply filters after deletion
   }
 }
