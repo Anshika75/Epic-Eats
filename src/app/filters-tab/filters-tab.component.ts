@@ -2,6 +2,7 @@ import { CuisineType } from './../models/cuisine.model';
 import { Component } from '@angular/core';
 import { TagComponent } from './tag/tag.component';
 import { CuisineData } from '../data/cuisine';
+import { RecipeService } from '../service/recipe.service';
 
 @Component({
   selector: 'app-filters-tab',
@@ -19,14 +20,9 @@ export class FiltersTabComponent {
     // }
     onSelectedCuisineTag(tagId: string) {
       this.selectedCuisineTagId = tagId;
-      console.log('Selected Tag:', tagId);
     }
     selectedDietaryTagId = '1';
-      // get selectedTag() {
-      //   return this.cuisines.find(cuisines => cuisines.id === this.selectedTagId);
-      // }
       onSelectedDietaryTag(tagId: string) {
         this.selectedDietaryTagId = tagId;
-        console.log('Selected Tag:', tagId);
       }
 }
