@@ -25,21 +25,39 @@ export class AppComponent {
   // Filter states
   selectedCuisineTagId = ''; // Default cuisine filter
   selectedDietaryTagId = ''; // Default dietary filter
+  cuisine = 0;
+  dietary = 0;
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
     this.filterRecipes();
+    this.cuisine = 1;
   }
 
   onSelectedDietaryTag(tagId: string) {
     this.selectedDietaryTagId = tagId;
     this.filterRecipes();
+    this.dietary = 1;
   }
 
   filterRecipes() {
-    this.filteredRecipes = this.recipes.filter(recipe => 
-      (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
-      (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
-    );
+    if(this.cuisine === 1 || this.dietary === 1) {
+      return this.filteredRecipes = this.recipes.filter(recipe => 
+        (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
+        (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
+      );
+    } else if(this.cuisine === 1 && this.dietary === 0) {
+      return this.filteredRecipes = this.recipes.filter(recipe => 
+        recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name
+      );
+    } else if(this.cuisine === 0 && this.dietary === 1) {
+      return this.filteredRecipes = this.recipes.filter(recipe => 
+        (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg')
+      );
+    } else{
+      return this.filteredRecipes = [...this.recipes];
+    }
+
+    
   }
 }
