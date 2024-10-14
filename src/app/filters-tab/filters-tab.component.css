@@ -8,6 +8,7 @@
     justify-content: start;
     align-items: center;
     flex-wrap: wrap;
+    column-gap: 10px;
     margin: 7px 0px;
     cursor: pointer;
     width: 100%;

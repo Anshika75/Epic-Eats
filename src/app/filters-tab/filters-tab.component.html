@@ -1,10 +1,15 @@
 <div class="filter-box">
     <h3 class="inter-bold">Dietary Preference</h3>
     <div class="filter-tag">
-        <app-tag></app-tag>
+        @for(dietarytype of dietaryTypes; track dietarytype.id ){
+            <app-tag [tag]="dietarytype.name"></app-tag>  
+         } 
     </div>
     <h3 class="inter-bold">Cuisine Preference</h3>
     <div class="filter-tag">
-        <app-tag></app-tag>
+        <!-- <app-tag></app-tag> -->
+         @for(cuisines of cuisines; track cuisines.id ){
+            <app-tag [tag]="cuisines.name"></app-tag>  
+         }
     </div>
 </div>

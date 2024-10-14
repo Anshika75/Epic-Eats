@@ -1,4 +1,4 @@
-import { CuisineType } from "./cuisine.model";
+import { CuisineType } from "../models/cuisine.model";
 
 export const CuisineData: CuisineType[] = [
     {
