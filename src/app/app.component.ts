@@ -58,6 +58,6 @@ export class AppComponent {
       return this.filteredRecipes = [...this.recipes];
     }
 
-    
+      
   }
 }
