@@ -66,6 +66,7 @@ export class AppComponent {
 
   onDeleteRecipe(recipeId: any) {
     console.log('Delete in AppComponent for recipe ID:', recipeId)
+    this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
     this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId); 
   }
 }
