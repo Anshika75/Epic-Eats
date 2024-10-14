@@ -8,5 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tag.component.css'
 })
 export class TagComponent {
-  @Input() tag!: string;
+  // @Input() tag!: string;
+  // add input with a default value
+  @Input() tag = 'veg';
 }
