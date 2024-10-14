@@ -1,4 +1,4 @@
-import { RecipeType } from "./recipe.model";
+import { RecipeType } from "../models/recipe.model";
 
 export const RecipeData: RecipeType[] = [
   {
