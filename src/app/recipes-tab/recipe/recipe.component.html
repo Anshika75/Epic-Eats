@@ -3,8 +3,8 @@
         <img [src]="recipe.imagePath" [alt]="recipe.name" >
         <div class="overlay"></div>
         <div class="tag poppins-regular">{{recipe.imgTag}}</div>
-        <button class="fav">
-            <i class="fa-solid fa-heart"></i>
+        <button class="fav"  (click)="onToggleFavorite()">
+            <i class="fa-solid fa-heart" [ngClass]="{'active': isFavorited()}"></i>
         </button>
         <div class="txt">
             <h3 class="inter-semibold">{{recipe.name}} 
