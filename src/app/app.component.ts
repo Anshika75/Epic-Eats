@@ -25,6 +25,7 @@ export class AppComponent {
   selectedDietaryTagId = ''; // Default dietary filter
   cuisine = 0;
   dietary = 0;
+  recipe!: RecipeType;
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
@@ -72,10 +73,14 @@ export class AppComponent {
 
   onToggleFavorite(recipeId: any) {
     console.log('Toggle favorite in AppComponent for recipe ID:', recipeId)
-    const recipe = this.recipes.find(recipe => recipe.id === recipeId);
-    if (recipe) {
-      recipe.isFavorite = !recipe.isFavorite;
+    const foundRecipe = this.recipes.find(recipe => recipe.id === recipeId);
+    if (foundRecipe) {
+      this.recipe = foundRecipe;
+    } else {
+      console.error('Recipe not found for ID:', recipeId);
     }
+    this.recipe.isFavorite = !this.recipe.isFavorite;
+    console.log('Recipe:', this.recipe);
   }
 }
 

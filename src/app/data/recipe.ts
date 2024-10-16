@@ -24,7 +24,7 @@ export const RecipeData: RecipeType[] = [
       'Serve the sauce over the spaghetti.'
     ],
     date: new Date('2024-01-01'),
-    isFavorite: true,
+    isFavorite: false,
     serves: 4,
     timeTaken: '30 mins',
     tags: ['Pasta', 'Sides'],
@@ -82,7 +82,7 @@ export const RecipeData: RecipeType[] = [
       'Serve with rice or naan.'
     ],
     date: new Date('2024-03-10'),
-    isFavorite: true,
+    isFavorite: false,
     serves: 4,
     timeTaken: '40 mins',
     tags: ['Spicy', 'Comfort Food', 'Dinner'],
