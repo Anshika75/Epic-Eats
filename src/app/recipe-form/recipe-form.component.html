@@ -1,42 +1,108 @@
-<form (ngSubmit)="onSubmit()">
-    <input type="text" [(ngModel)]="recipe.name" name="name" placeholder="Recipe Name" required />
-    <input type="text" [(ngModel)]="recipe.imagePath" name="imagePath" placeholder="Image Path" required />
-    <input type="number" [(ngModel)]="recipe.calories" name="calories" placeholder="Calories" required />
-    <textarea [(ngModel)]="recipe.description" name="description" placeholder="Description"></textarea>
-  
-    <div>
-        <label>
-          <input type="radio" [(ngModel)]="recipe.type" name="type" value="veg" /> Veg
-        </label>
-        <label>
-          <input type="radio" [(ngModel)]="recipe.type" name="type" value="non-veg" /> Non-Veg
-        </label>
-      </div>
-  
-    <select [(ngModel)]="recipe.cuisine" name="cuisine">
-      <option *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
-    </select>
-  
-    <div *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByIndex">
-        <input type="text" [(ngModel)]="ingredient.name" name="ingredientName{{i}}" placeholder="Ingredient Name" required />
-        <input type="text" [(ngModel)]="ingredient.amount" name="ingredientAmount{{i}}" placeholder="Amount" required />
-        <button type="button" (click)="addIngredient(i)">+</button>
-      </div>
-    
-  
-      <div *ngFor="let step of recipe.steps; let i = index; trackBy: trackByIndex">
-        <textarea [(ngModel)]="recipe.steps[i]" name="step{{i}}" placeholder="Step" required></textarea>
-        <button type="button" (click)="addStep(i)">+</button>
-      </div>
+    <form class="recipe-form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-name" class="inter-semibold">Recipe Name</label>
+                    <input type="text" id="recipe-name" class="form-control poppins-regular" [(ngModel)]="recipe.name" name="name" placeholder="Recipe Name" required>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-image" class="inter-semibold">Image Path</label>
+                    <input type="text" id="recipe-image" class="form-control poppins-regular" [(ngModel)]="recipe.imagePath" name="imagePath" placeholder="Image Path" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-calories" class="inter-semibold">Calories</label>
+                    <input type="number" id="recipe-calories" class="form-control poppins-regular" [(ngModel)]="recipe.calories" name="calories" placeholder="Calories" required>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-serves" class="inter-semibold">Serves</label>
+                    <input type="number" id="recipe-serves" class="form-control poppins-regular" [(ngModel)]="recipe.serves" name="serves" placeholder="Serves" required>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-time" class="inter-semibold">Time Taken</label>
+                    <input type="text" id="recipe-time" class="form-control poppins-regular" [(ngModel)]="recipe.timeTaken" name="timeTaken" placeholder="Time Taken" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-description" class="inter-semibold">Description</label>
+                    <textarea id="recipe-description" class="form-control poppins-regular" [(ngModel)]="recipe.description" name="description" placeholder="Description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label class="inter-semibold">Type</label>
+                    <div class="radio-group inter-medium">
+                        <label>
+                            <input type="radio" name="type" [(ngModel)]="recipe.type" value="veg"> Veg
+                        </label>
+                        <label>
+                            <input type="radio" name="type" [(ngModel)]="recipe.type" value="non-veg"> Non-Veg
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-cuisine" class="inter-semibold">Cuisine</label>
+                    <select id="recipe-cuisine" class="form-control poppins-regular" [(ngModel)]="recipe.cuisine" name="cuisine" placeholder="Select Cuisine">
+                        <option class="inter-semibold" value="">Select Cuisine</option>
+                        <option  class="inter-regular" *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
 
-    <input type="number" [(ngModel)]="recipe.serves" name="serves" placeholder="Serves" required />
-    <input type="text" [(ngModel)]="recipe.timeTaken" name="timeTaken" placeholder="Time Taken" required />
-    
-    <div *ngFor="let tag of recipe.tags; let i = index; trackBy: trackByIndex">
-        <input type="text" [(ngModel)]="recipe.tags[i]" name="tag{{i}}" placeholder="Tag" required />
-        <button type="button" (click)="addTag(i)">+</button>
-      </div>
-    <input type="text" [(ngModel)]="recipe.imgTag" name="imgTag" placeholder="Image Tag" required />
-    <button type="submit">Add Recipe</button>
-  </form>
-  
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="recipe-imgtag" class="inter-semibold">Image Tag</label>
+                    <input type="text" id="recipe-imgtag" class="form-control poppins-regular" [(ngModel)]="recipe.imgTag" name="imgTag" placeholder="Image Tag" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="inter-semibold">Ingredients</label>
+            <div class="ingredient-group" *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByIndex">
+                <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.name" name="ingredientName{{i}}" placeholder="Ingredient Name" required>
+                <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.amount" name="ingredientAmount{{i}}" placeholder="Amount" required>
+                <button type="button" class="btn btn-primary" (click)="onAddIngredient(i)">+</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">-</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="inter-semibold">Steps</label>
+            <div class="step-group" *ngFor="let step of recipe.steps; let i = index; trackBy: trackByIndex">
+                <textarea class="form-control poppins-regular" [(ngModel)]="recipe.steps[i]" name="step{{i}}" placeholder="Step" required rows="1" cols="1"></textarea>
+                <button type="button" class="btn btn-primary" (click)="onAddStep(i)">+</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteStep(i)">-</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="inter-semibold">Tags</label>
+            <div class="tag-group" *ngFor="let tag of recipe.tags; let i = index; trackBy: trackByIndex">
+                <input type="text" class="form-control poppins-regular"[(ngModel)]="recipe.tags[i]"  name="tag{{i}}" placeholder="Tag" required>
+                <button type="button" class="btn btn-primary" (click)="onAddTag(i)">+</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteTag(i)">-</button>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary inter-semibold">Add Recipe</button>
+            <button type="button" class="btn btn-secondary inter-semibold" (click)="onCancelAddForm()">Cancel</button>
+        </div>
+    </form>

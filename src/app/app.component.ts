@@ -7,11 +7,12 @@ import { HeaderComponent } from './header/header.component';
 import { FiltersTabComponent } from './filters-tab/filters-tab.component';
 import { RecipesTabComponent } from './recipes-tab/recipes-tab.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent],
+  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -24,12 +25,21 @@ export class AppComponent {
   cuisine = 0;
   dietary = 0;
   showFavorites = false;
+  showRecipeForm = false; 
+
+   addRecipeForm() {
+    this.showRecipeForm = true;
+  }
+  cancelAddForm() {
+    this.showRecipeForm = false;
+  }
 
   onRecipeCreated(newRecipe: RecipeType) {
     this.recipes.push(newRecipe);
-    this.filteredRecipes = [...this.recipes]; // Update filtered recipes to show the newly added recipe
+    this.filteredRecipes = [...this.recipes]; 
+    this.showRecipeForm = false;
   }
-  recipe!: RecipeType;
+
   get favoriteCount(): number {
     return this.recipes.filter(recipe => recipe.isFavorite).length;
   }

@@ -7,13 +7,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Input() favoriteCount: number = 0; // Receive the count of favorite recipes from the parent
-  @Output() toggleFavorites: EventEmitter<void> = new EventEmitter<void>(); // Emit event for toggling favorites
+  @Input() favoriteCount: number = 0;
+  @Output() toggleFavorites: EventEmitter<void> = new EventEmitter<void>();
+  @Output() addForm: EventEmitter<void> = new EventEmitter<void>();
   
-  isFavoritesActive: boolean = false; // Track if the favorite filter is active
+  isFavoritesActive: boolean = false;
+
 
   onToggleFavorites() {
-    this.isFavoritesActive = !this.isFavoritesActive; // Toggle the heart icon's active state
-    this.toggleFavorites.emit(); // Emit the event to inform parent to filter the recipes
+    this.isFavoritesActive = !this.isFavoritesActive;
+    this.toggleFavorites.emit();
+  }
+
+  onAddForm() {
+    this.addForm.emit();
   }
 }

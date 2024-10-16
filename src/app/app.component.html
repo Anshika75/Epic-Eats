@@ -1,16 +1,24 @@
 <main>
-  <app-header [favoriteCount]="favoriteCount" (toggleFavorites)="toggleFavorites()"></app-header>
+  <app-header [favoriteCount]="favoriteCount" (toggleFavorites)="toggleFavorites()"
+    (addForm)="addRecipeForm()"></app-header>
   <section>
     <div class="tag-box">
-      <app-filters-tab 
-        (tagSelectedCuisine)="onSelectedCuisineTag($event)" 
-        (tagSelectedDietary)="onSelectedDietaryTag($event)"
-        (filtersCleared)="clearAllFilters()">
+      <app-filters-tab (tagSelectedCuisine)="onSelectedCuisineTag($event)"
+        (tagSelectedDietary)="onSelectedDietaryTag($event)" (filtersCleared)="clearAllFilters()">
       </app-filters-tab>
     </div>
-    <div class="recipe-main">
-      <app-recipes-tab [recipes]="filteredRecipes" (deleteRecipe)="onDeleteRecipe($event)" (toggleFavorite)="onToggleFavorite($event)"></app-recipes-tab>
+    <!-- <div class="recipe-main" *ngIf="showRecipeForm"> -->
+      <div class="recipe-main">
+        <app-recipe-form [cuisines]="cuisines" (recipeCreated)="onRecipeCreated($event)" (cancelAddForm)="cancelAddForm()">
+      </app-recipe-form>
     </div>
-    <app-recipe-form [cuisines]="cuisines" (recipeCreated)="onRecipeCreated($event)"></app-recipe-form>
+
+    <!-- <div class="recipe-main" *ngIf="!showRecipeForm">
+      <div>
+        <app-recipes-tab [recipes]="filteredRecipes" (deleteRecipe)="onDeleteRecipe($event)"
+          (toggleFavorite)="onToggleFavorite($event)"></app-recipes-tab>
+      </div>
+    </div> -->
+
   </section>
 </main>
