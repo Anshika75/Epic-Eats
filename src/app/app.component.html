@@ -7,18 +7,17 @@
         (tagSelectedDietary)="onSelectedDietaryTag($event)" (filtersCleared)="clearAllFilters()">
       </app-filters-tab>
     </div>
-    <!-- <div class="recipe-main" *ngIf="showRecipeForm"> -->
-      <div class="recipe-main">
+    <div class="recipe-main" *ngIf="showRecipeForm">
         <app-recipe-form [cuisines]="cuisines" (recipeCreated)="onRecipeCreated($event)" (cancelAddForm)="cancelAddForm()">
       </app-recipe-form>
     </div>
 
-    <!-- <div class="recipe-main" *ngIf="!showRecipeForm">
+    <div class="recipe-main" *ngIf="!showRecipeForm">
       <div>
         <app-recipes-tab [recipes]="filteredRecipes" (deleteRecipe)="onDeleteRecipe($event)"
           (toggleFavorite)="onToggleFavorite($event)"></app-recipes-tab>
       </div>
-    </div> -->
+    </div>
 
   </section>
 </main>

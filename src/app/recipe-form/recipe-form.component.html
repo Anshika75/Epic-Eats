@@ -81,7 +81,9 @@
             <div class="ingredient-group" *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByIndex">
                 <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.name" name="ingredientName{{i}}" placeholder="Ingredient Name" required>
                 <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.amount" name="ingredientAmount{{i}}" placeholder="Amount" required>
-                <button type="button" class="btn btn-primary" (click)="onAddIngredient(i)">+</button>
+                
+                <!-- Show '+' button only for the last row -->
+                <button *ngIf="i === recipe.ingredients.length - 1" type="button" class="btn btn-primary" (click)="onAddIngredient(i)">+</button>
                 <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">-</button>
             </div>
         </div>
@@ -89,15 +91,15 @@
             <label class="inter-semibold">Steps</label>
             <div class="step-group" *ngFor="let step of recipe.steps; let i = index; trackBy: trackByIndex">
                 <textarea class="form-control poppins-regular" [(ngModel)]="recipe.steps[i]" name="step{{i}}" placeholder="Step" required rows="1" cols="1"></textarea>
-                <button type="button" class="btn btn-primary" (click)="onAddStep(i)">+</button>
+                <button *ngIf="i === recipe.steps.length - 1" type="button" class="btn btn-primary" (click)="onAddStep(i)">+</button>
                 <button type="button" class="btn btn-danger" (click)="onDeleteStep(i)">-</button>
             </div>
         </div>
         <div class="form-group">
             <label class="inter-semibold">Tags</label>
             <div class="tag-group" *ngFor="let tag of recipe.tags; let i = index; trackBy: trackByIndex">
-                <input type="text" class="form-control poppins-regular"[(ngModel)]="recipe.tags[i]"  name="tag{{i}}" placeholder="Tag" required>
-                <button type="button" class="btn btn-primary" (click)="onAddTag(i)">+</button>
+                <input type="text" class="form-control poppins-regular" [(ngModel)]="recipe.tags[i]" name="tag{{i}}" placeholder="Tag" required>
+                <button *ngIf="i === recipe.tags.length - 1" type="button" class="btn btn-primary" (click)="onAddTag(i)">+</button>
                 <button type="button" class="btn btn-danger" (click)="onDeleteTag(i)">-</button>
             </div>
         </div>
