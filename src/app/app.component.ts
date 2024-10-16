@@ -15,7 +15,6 @@ import { RecipesTabComponent } from './recipes-tab/recipes-tab.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // Recipe data
   recipes: RecipeType[] = RecipeData;
   cuisines: CuisineType[] = CuisineData;
   filteredRecipes: RecipeType[] = [...this.recipes]; // Start with all recipes
@@ -25,12 +24,13 @@ export class AppComponent {
   selectedDietaryTagId = ''; // Default dietary filter
   cuisine = 0;
   dietary = 0;
+  showFavorites = false; // For toggling favorite filter
   recipe!: RecipeType;
 
+  // Getter for favorite count
   get favoriteCount(): number {
     return this.recipes.filter(recipe => recipe.isFavorite).length;
   }
-
 
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
@@ -44,48 +44,48 @@ export class AppComponent {
     this.filterRecipes();
   }
 
+  // Updated filterRecipes function to handle favorites along with cuisine and dietary filters
   filterRecipes() {
-    if(this.cuisine === 1 && this.dietary === 1) {
-       this.filteredRecipes = this.recipes.filter(recipe => 
-        (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg') &&
-        (recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name)
-      );
-    } else if(this.cuisine === 1 && this.dietary === 0) {
-       this.filteredRecipes = this.recipes.filter(recipe => 
-        recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name
-      );
-    } else if(this.cuisine === 0 && this.dietary === 1) {
-       this.filteredRecipes = this.recipes.filter(recipe => 
-        (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg')
-      );
-    } else{
-       this.filteredRecipes = [...this.recipes];
-    }
-
+    this.filteredRecipes = this.recipes.filter(recipe => {
+      // Apply the cuisine filter if one is selected
+      const matchesCuisine = this.cuisine === 0 || recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name;
+      
+      // Apply the dietary filter if one is selected
+      const matchesDietary = this.dietary === 0 || (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg');
+      
+      // Apply the favorites filter if toggled
+      const matchesFavorites = !this.showFavorites || recipe.isFavorite;
+      
+      // Return recipes that match all filters
+      return matchesCuisine && matchesDietary && matchesFavorites;
+    });
   }
 
   clearAllFilters() {
     this.selectedCuisineTagId = ''; 
     this.selectedDietaryTagId = ''; 
-    this.filteredRecipes = [...this.recipes];
+    this.cuisine = 0;
+    this.dietary = 0;
+    this.showFavorites = false;
+    this.filterRecipes();
   }
 
   onDeleteRecipe(recipeId: any) {
-    console.log('Delete in AppComponent for recipe ID:', recipeId)
     this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
-    this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId); 
+    this.filterRecipes();
   }
 
   onToggleFavorite(recipeId: any) {
-    console.log('Toggle favorite in AppComponent for recipe ID:', recipeId)
     const foundRecipe = this.recipes.find(recipe => recipe.id === recipeId);
     if (foundRecipe) {
-      this.recipe = foundRecipe;
-    } else {
-      console.error('Recipe not found for ID:', recipeId);
+      foundRecipe.isFavorite = !foundRecipe.isFavorite;
     }
-    this.recipe.isFavorite = !this.recipe.isFavorite;
-    console.log('Recipe:', this.recipe);
+    this.filterRecipes();
+  }
+
+  // New function to toggle the favorite filter
+  toggleFavorites() {
+    this.showFavorites = !this.showFavorites;
+    this.filterRecipes();
   }
 }
-

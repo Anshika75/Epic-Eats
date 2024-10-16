@@ -4,7 +4,7 @@
     </div>
     <div class="btn-row">
       <div class="fav-container">
-        <i class="fas fa-heart fav"></i>
+        <i class="fas fa-heart fav" [class.active]="isFavoritesActive"  (click)="onToggleFavorites()"></i>
         <p class="favorite-count poppins-medium">{{ favoriteCount }}</p> <!-- Show favorite count here -->
       </div>
       <button class="poppins-semibold">

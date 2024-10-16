@@ -72,3 +72,7 @@ header{
 .btn-row .fav-container .fav:hover{
     color: crimson;
 }
+
+.btn-row .fav-container .fav.active{
+    color: crimson;
+}
