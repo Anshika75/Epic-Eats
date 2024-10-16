@@ -69,4 +69,13 @@ export class AppComponent {
     this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
     this.filteredRecipes = this.recipes.filter(recipe => recipe.id !== recipeId); 
   }
+
+  onToggleFavorite(recipeId: any) {
+    console.log('Toggle favorite in AppComponent for recipe ID:', recipeId)
+    const recipe = this.recipes.find(recipe => recipe.id === recipeId);
+    if (recipe) {
+      recipe.isFavorite = !recipe.isFavorite;
+    }
+  }
 }
+
