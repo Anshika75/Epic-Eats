@@ -27,6 +27,11 @@ export class AppComponent {
   dietary = 0;
   recipe!: RecipeType;
 
+  get favoriteCount(): number {
+    return this.recipes.filter(recipe => recipe.isFavorite).length;
+  }
+
+
   onSelectedCuisineTag(tagId: string) {
     this.selectedCuisineTagId = tagId;
     this.cuisine = 1;
