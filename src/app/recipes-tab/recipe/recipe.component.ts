@@ -19,15 +19,25 @@ export class RecipeComponent {
   // @Input() servings = '4 servings';
   // @Input() date = '12/11/21';
   @Output() deleteRecipe = new EventEmitter<string>();
+  @Output() toggleFavorite = new EventEmitter<number>();
+
   @Input() recipe: any;
+
+  trimDescription(description: string): string {
+    return description.length > 70 ? description.substring(0, 70) + '...' : description;
+  } 
 
   onDelete() {
     console.log('Delete clicked for recipe:', this.recipe.id);
     this.deleteRecipe.emit(this.recipe.id); // Emit the recipe ID to the parent
   }
 
-  trimDescription(description: string): string {
-    return description.length > 70 ? description.substring(0, 70) + '...' : description;
-  } 
+  onToggleFavorite() {
+    this.toggleFavorite.emit(this.recipe.id);
+  }
+
+  isFavorited() {
+    return this.recipe.isFavorite;
+  }
 }
 
