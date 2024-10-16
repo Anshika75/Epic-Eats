@@ -1,1 +1,42 @@
-<p>recipe-form works!</p>
+<form (ngSubmit)="onSubmit()">
+    <input type="text" [(ngModel)]="recipe.name" name="name" placeholder="Recipe Name" required />
+    <input type="text" [(ngModel)]="recipe.imagePath" name="imagePath" placeholder="Image Path" required />
+    <input type="number" [(ngModel)]="recipe.calories" name="calories" placeholder="Calories" required />
+    <textarea [(ngModel)]="recipe.description" name="description" placeholder="Description"></textarea>
+  
+    <div>
+        <label>
+          <input type="radio" [(ngModel)]="recipe.type" name="type" value="veg" /> Veg
+        </label>
+        <label>
+          <input type="radio" [(ngModel)]="recipe.type" name="type" value="non-veg" /> Non-Veg
+        </label>
+      </div>
+  
+    <select [(ngModel)]="recipe.cuisine" name="cuisine">
+      <option *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
+    </select>
+  
+    <div *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByIndex">
+        <input type="text" [(ngModel)]="ingredient.name" name="ingredientName{{i}}" placeholder="Ingredient Name" required />
+        <input type="text" [(ngModel)]="ingredient.amount" name="ingredientAmount{{i}}" placeholder="Amount" required />
+        <button type="button" (click)="addIngredient(i)">+</button>
+      </div>
+    
+  
+      <div *ngFor="let step of recipe.steps; let i = index; trackBy: trackByIndex">
+        <textarea [(ngModel)]="recipe.steps[i]" name="step{{i}}" placeholder="Step" required></textarea>
+        <button type="button" (click)="addStep(i)">+</button>
+      </div>
+
+    <input type="number" [(ngModel)]="recipe.serves" name="serves" placeholder="Serves" required />
+    <input type="text" [(ngModel)]="recipe.timeTaken" name="timeTaken" placeholder="Time Taken" required />
+    
+    <div *ngFor="let tag of recipe.tags; let i = index; trackBy: trackByIndex">
+        <input type="text" [(ngModel)]="recipe.tags[i]" name="tag{{i}}" placeholder="Tag" required />
+        <button type="button" (click)="addTag(i)">+</button>
+      </div>
+    <input type="text" [(ngModel)]="recipe.imgTag" name="imgTag" placeholder="Image Tag" required />
+    <button type="submit">Add Recipe</button>
+  </form>
+  

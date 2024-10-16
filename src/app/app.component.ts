@@ -6,28 +6,30 @@ import { CuisineData } from './data/cuisine';
 import { HeaderComponent } from './header/header.component';
 import { FiltersTabComponent } from './filters-tab/filters-tab.component';
 import { RecipesTabComponent } from './recipes-tab/recipes-tab.component';
+import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent],
+  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   recipes: RecipeType[] = RecipeData;
   cuisines: CuisineType[] = CuisineData;
-  filteredRecipes: RecipeType[] = [...this.recipes]; // Start with all recipes
-
-  // Filter states
-  selectedCuisineTagId = ''; // Default cuisine filter
-  selectedDietaryTagId = ''; // Default dietary filter
+  filteredRecipes: RecipeType[] = [...this.recipes]; 
+  selectedCuisineTagId = ''; 
+  selectedDietaryTagId = ''; 
   cuisine = 0;
   dietary = 0;
-  showFavorites = false; // For toggling favorite filter
-  recipe!: RecipeType;
+  showFavorites = false;
 
-  // Getter for favorite count
+  onRecipeCreated(newRecipe: RecipeType) {
+    this.recipes.push(newRecipe);
+    this.filteredRecipes = [...this.recipes]; // Update filtered recipes to show the newly added recipe
+  }
+  recipe!: RecipeType;
   get favoriteCount(): number {
     return this.recipes.filter(recipe => recipe.isFavorite).length;
   }
