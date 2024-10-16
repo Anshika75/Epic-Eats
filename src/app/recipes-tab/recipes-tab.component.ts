@@ -14,8 +14,14 @@ import { RecipeService } from '../service/recipe.service';
 export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
   @Output() deleteRecipe = new EventEmitter<string>();
+  @Output() toggleFavorite = new EventEmitter<number>();
+
   onDeleteRecipe(recipeId: string) { 
     console.log('Delete event received for recipe ID:', recipeId);
     this.deleteRecipe.emit(recipeId); // Emit the recipe ID to the parent
+  }
+
+  onToggleFavorite(recipeId: number) {
+    this.toggleFavorite.emit(recipeId);
   }
 }
