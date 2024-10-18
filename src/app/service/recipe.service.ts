@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RecipeType } from '../models/recipe.model';  // Importing RecipeType interface
 import { CuisineType } from '../models/cuisine.model';
-import { RecipeData } from '../data/recipe';  // Importing sample recipe data
+import RecipeData from '../data/recipe';  // Importing sample recipe data
 import { CuisineData } from '../data/cuisine';  // Importing sample cuisine data
 import { Observable, of } from 'rxjs';
 

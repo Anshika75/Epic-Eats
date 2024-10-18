@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeType } from './models/recipe.model';
-import { RecipeData } from './data/recipe';
+import RecipeData from './data/recipe';
 import { CuisineType } from './models/cuisine.model';
 import { CuisineData } from './data/cuisine';
 import { HeaderComponent } from './header/header.component';
@@ -18,7 +18,7 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
     FiltersTabComponent, 
     RecipesTabComponent, 
     RecipeFormComponent, 
-    CommonModule, 
+    CommonModule,   
     RecipeDetailsComponent
   ],
   templateUrl: './app.component.html',
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
   onEditRecipe(recipe: RecipeType) {
     this.recipeBeingEdited = recipe;
     this.showRecipeForm = true;
-    this.isEditing = true; 
+    this.isEditing = true;
     this.selectedRecipe = recipe;
   }
 

@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecipeComponent } from "./recipe/recipe.component";
 import { RecipeType } from '../models/recipe.model';
-import { RecipeData } from '../data/recipe';
-import { RecipeService } from '../service/recipe.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
