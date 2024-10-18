@@ -15,6 +15,7 @@ export class RecipesTabComponent {
   @Input() recipes: RecipeType[] = [];
   @Output() deleteRecipe = new EventEmitter<string>();
   @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() recipeSelected = new EventEmitter<RecipeType>(); 
 
   onDeleteRecipe(recipeId: string) { 
     console.log('Delete event received for recipe ID:', recipeId);
@@ -24,4 +25,9 @@ export class RecipesTabComponent {
   onToggleFavorite(recipeId: number) {
     this.toggleFavorite.emit(recipeId);
   }
+
+  onRecipeSelected(recipe: RecipeType) {
+    this.recipeSelected.emit(recipe);  // Emit selected recipe to parent component
+  }
 }
+

@@ -139,6 +139,34 @@
     font-size: 2.5rem;
     font-weight: 600;
     color: #5c2c19;
+    display: flex;
+    align-items: center;
+
+}
+
+
+.container .details h3 .circle{
+    height:25px;
+    width:25px;
+    display:grid;
+    place-items: center;
+    font-size: 0.7rem;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.container .details h3 .circle i{
+    margin-bottom: 1px;
+}
+
+.container .details h3 .circle.veg{
+    border: 2px solid #38bd47;
+    color: #38bd47;
+}
+
+.container .details h3 .circle.non-veg{
+    border: 2px solid #e75a5a;
+    color: #e75a5a;
 }
 
 .container .border{

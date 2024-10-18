@@ -13,7 +13,14 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent, CommonModule, RecipeDetailsComponent],
+  imports: [
+    HeaderComponent, 
+    FiltersTabComponent, 
+    RecipesTabComponent, 
+    RecipeFormComponent, 
+    CommonModule, 
+    RecipeDetailsComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -27,6 +34,17 @@ export class AppComponent {
   dietary = 0;
   showFavorites = false;
   showRecipeForm = false; 
+  selectedRecipe: RecipeType | null = null; // explain: selectedRecipe is a property that holds the selected recipe object. It is initialized to null.
+
+
+  onRecipeSelected(recipe: RecipeType) {
+    this.selectedRecipe = recipe;
+  }
+
+
+  onBackToRecipes() {
+    this.selectedRecipe = null;
+  }
 
    addRecipeForm() {
     this.showRecipeForm = true;
@@ -57,19 +75,11 @@ export class AppComponent {
     this.filterRecipes();
   }
 
-  // Updated filterRecipes function to handle favorites along with cuisine and dietary filters
   filterRecipes() {
     this.filteredRecipes = this.recipes.filter(recipe => {
-      // Apply the cuisine filter if one is selected
       const matchesCuisine = this.cuisine === 0 || recipe.cuisine === this.cuisines.find(cuisine => cuisine.id === this.selectedCuisineTagId)?.name;
-      
-      // Apply the dietary filter if one is selected
       const matchesDietary = this.dietary === 0 || (this.selectedDietaryTagId === '1' ? recipe.type === 'veg' : recipe.type === 'non-veg');
-      
-      // Apply the favorites filter if toggled
       const matchesFavorites = !this.showFavorites || recipe.isFavorite;
-      
-      // Return recipes that match all filters
       return matchesCuisine && matchesDietary && matchesFavorites;
     });
   }
@@ -94,8 +104,6 @@ export class AppComponent {
     }
     this.filterRecipes();
   }
-
-  // New function to toggle the favorite filter
   toggleFavorites() {
     this.showFavorites = !this.showFavorites;
     this.filterRecipes();

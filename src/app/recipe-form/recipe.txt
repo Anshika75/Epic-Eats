@@ -1,0 +1,15 @@
+now as of next step let's create a recipe form component:
+
+- name: txt
+- imagePath: txt
+- calories: number
+- description: txtarea
+- type: checkbox - veg or non veg
+- cuisine: selectbox: cuisine list
+- ingredient: name:txt, amount: txt, plus icon only active once the value in initial key-value pair is filled, else disabled
+- steps: txt, plus icon only active once the value in initial input txt is filled, else disabled
+- date: auto fetch
+- serves: number
+- time taken: txt
+- tags: txt, plus icon only active once the value in initial input txt is filled, else disabled
+- imgTag: txt

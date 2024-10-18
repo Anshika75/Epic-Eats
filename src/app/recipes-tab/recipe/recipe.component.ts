@@ -1,5 +1,6 @@
 import { CommonModule, DatePipe, } from '@angular/common';
 import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { RecipeType } from '../../models/recipe.model';
 
 @Component({
   selector: 'app-recipe',
@@ -22,6 +23,12 @@ export class RecipeComponent {
   @Output() toggleFavorite = new EventEmitter<number>();
 
   @Input() recipe: any;
+
+  @Output() selectRecipe = new EventEmitter<RecipeType>();
+
+  onSelectRecipe() {
+    this.selectRecipe.emit(this.recipe);
+  }
 
   trimDescription(description: string): string {
     return description.length > 70 ? description.substring(0, 70) + '...' : description;

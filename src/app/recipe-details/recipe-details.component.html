@@ -1,45 +1,49 @@
 <div class="container">
     <div class="row">
-        <div class="back inter-medium">
+        <div class="back inter-medium" (click)="onBackClick()">
             <i class="fas fa-arrow-left"></i>
             <span>Back to recipes</span>
         </div>
         <div class="date inter-medium">
-            <span>Published on: 12/12/2020</span>
+            <span>Published on: {{ recipe?.date | date }}</span>
         </div>
     </div>   
     <div class="img-box">
-        <img src="https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D" alt="recipe-details">
+        <img [src]="recipe?.imagePath" alt="recipe-details">
         <div class="overlay"></div>
-        <button class="fav">
-            <i class="fas fa-heart"></i>
+        <button class="fav"  [ngClass]="{'active': isFavorited() ? 'active' : ''}" (click)="onToggleFavorite()">
+            <i class="fa-solid fa-heart"></i>
         </button>
-        <div class="img-tag poppins-regular">Main course</div>
+        <div class="img-tag poppins-regular">{{ recipe?.imgTag }}</div>
     </div>
     <div class="features">
         <div class="feature poppins-medium">
             <i class="fas fa-fire"></i>
-            <span>200 cal</span>
+            <span>{{ recipe?.calories }} cal</span>
         </div>
         <div class="feature poppins-medium">
             <i class="fas fa-utensils"></i>
-            <span>Indian</span>
+            <span>{{ recipe?.cuisine }}</span>
         </div>
         <div class="feature poppins-medium">
             <i class="fas fa-users"></i>
-            <span>4 serves</span>
+            <span>{{ recipe?.serves }} serves</span>
         </div>
         <div class="feature poppins-medium">
             <i class="fas fa-clock"></i>
-            <span>30 mins</span>
+            <span>{{ recipe?.timeTaken }}</span>
         </div>
     </div>
     <div class="details">
         <h3 class="title inter-semibold">
-            Recipe title
+            {{ recipe?.name }}
+            
+            <div class="circle non-veg" [ngClass]="{'veg': recipe?.type === 'veg', 'non-veg': recipe?.type === 'non-veg'}">
+                <i class="fa-solid fa-circle"></i>
+            </div>
         </h3>
         <p class="description poppins-regular">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {{ recipe?.description }}
         </p>
     </div>
     <hr class="border" />
@@ -49,13 +53,9 @@
             Ingredients
         </h3>
         <ul class="list">
-            <li class="item poppins-regular">
+            <li class="item poppins-regular" *ngFor="let ingredient of recipe?.ingredients">
                 <i class="fas fa-check"></i>
-                <span>1 cup of rice</span>
-            </li>
-            <li class="item poppins-regular">
-                <i class="fas fa-check"></i>
-                <span>1 cup of rice</span>
+                <span>{{ ingredient.amount }} of {{ ingredient.name }}</span>
             </li>
         </ul>
     </div>
@@ -65,18 +65,15 @@
             Steps
         </h3>
         <ol class="list" type="i">
-            <li class="item poppins-regular">
-               Add 1 cup of rice
-            </li>
-            <li class="item poppins-regular">
-                Add 3 cup of rice
+            <li class="item poppins-regular" *ngFor="let step of recipe?.steps">
+               {{ step }}
             </li>
         </ol>
     </div>
     <hr class="border" />
     <div class="tags">
-            <div class="tag poppins-regular">#healthy</div>
-            <div class="tag poppins-regular">#vegan</div>
-            <div class="tag poppins-regular">#spicy</div>
+        <div class="tag poppins-regular" *ngFor="let tag of recipe?.tags">
+            #{{ tag }}
+        </div>
     </div>
 </div>
