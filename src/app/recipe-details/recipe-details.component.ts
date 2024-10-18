@@ -13,6 +13,8 @@ export class RecipeDetailsComponent {
   @Input() recipe: RecipeType | undefined;
   @Output() backToRecipes = new EventEmitter<void>();
   @Output() toggleFavorite = new EventEmitter<any>();
+  @Output() editRecipe = new EventEmitter<RecipeType>();
+
   
   onToggleFavorite() {  
     this.toggleFavorite.emit(this?.recipe?.id);
@@ -24,5 +26,11 @@ export class RecipeDetailsComponent {
 
   onBackClick() {
     this.backToRecipes.emit();
+  }
+
+  onEditClick() {
+    if (this.recipe) {
+      this.editRecipe.emit(this.recipe);  // Emit the recipe to parent component to open the form for editing
+    }
   }
 }
