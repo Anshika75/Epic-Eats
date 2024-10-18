@@ -8,11 +8,12 @@ import { FiltersTabComponent } from './filters-tab/filters-tab.component';
 import { RecipesTabComponent } from './recipes-tab/recipes-tab.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 import { CommonModule } from '@angular/common';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent, CommonModule],
+  imports: [HeaderComponent, FiltersTabComponent, RecipesTabComponent, RecipeFormComponent, CommonModule, RecipeDetailsComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -78,7 +79,6 @@ export class AppComponent {
     this.selectedDietaryTagId = ''; 
     this.cuisine = 0;
     this.dietary = 0;
-    this.showFavorites = false;
     this.filterRecipes();
   }
 
