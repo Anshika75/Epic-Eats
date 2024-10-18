@@ -3,11 +3,12 @@ import { RecipeComponent } from "./recipe/recipe.component";
 import { RecipeType } from '../models/recipe.model';
 import { RecipeData } from '../data/recipe';
 import { RecipeService } from '../service/recipe.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-recipes-tab',
   standalone: true,
-  imports: [RecipeComponent],
+  imports: [RecipeComponent, CommonModule],
   templateUrl: './recipes-tab.component.html',
   styleUrl: './recipes-tab.component.css'
 })

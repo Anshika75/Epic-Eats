@@ -48,6 +48,7 @@ export class AppComponent {
 
    addRecipeForm() {
     this.showRecipeForm = true;
+    this.selectedRecipe = null;
   }
   cancelAddForm() {
     this.showRecipeForm = false;

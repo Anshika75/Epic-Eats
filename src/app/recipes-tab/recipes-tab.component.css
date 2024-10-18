@@ -7,3 +7,15 @@
     grid-row-gap: 25px;
     overflow-y: scroll;
 }
+
+.fallback-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 2rem;
+    color: #74848c;
+    background: #fafcfe;
+}

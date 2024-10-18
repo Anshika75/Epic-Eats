@@ -12,12 +12,10 @@ import { CommonModule, DatePipe } from '@angular/common';
 export class RecipeDetailsComponent {
   @Input() recipe: RecipeType | undefined;
   @Output() backToRecipes = new EventEmitter<void>();
-  @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() toggleFavorite = new EventEmitter<any>();
   
-  onToggleFavorite() {
-    if (this.recipe && typeof this.recipe.id === 'number') {
-      this.toggleFavorite.emit(this.recipe.id);
-    }
+  onToggleFavorite() {  
+    this.toggleFavorite.emit(this?.recipe?.id);
   }
 
   isFavorited() {
