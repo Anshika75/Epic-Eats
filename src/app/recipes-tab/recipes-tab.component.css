@@ -5,5 +5,5 @@
     grid-template-columns: 1fr 1fr 1fr;
     place-items: center;
     grid-row-gap: 25px;
-    padding-bottom: 20px;
+    overflow-y: scroll;
 }
