@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RecipeType } from '../models/recipe.model';
 import { CuisineType } from '../models/cuisine.model';
 import { FormsModule } from '@angular/forms';
@@ -11,19 +11,21 @@ import { CommonModule } from '@angular/common';
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css']
 })
-export class RecipeFormComponent {
+export class RecipeFormComponent implements OnInit {
   @Input() cuisines: CuisineType[] = [];
   @Output() recipeCreated = new EventEmitter<RecipeType>();
   @Output() cancelAddForm: EventEmitter<void> = new EventEmitter<void>();
+  @Output() recipeUpdated = new EventEmitter<RecipeType>();
 
-  recipe: RecipeType = {
+  // Initialize with a default recipe structure
+  @Input() recipe: RecipeType = {
     name: '',
     imagePath: '',
     calories: 0,
     description: '',
-    type: 'veg', 
+    type: 'veg',
     cuisine: '',
-    ingredients: [{ name: '', amount: '' }], 
+    ingredients: [{ name: '', amount: '' }],
     steps: [''],
     tags: [''],
     date: new Date(),
@@ -34,10 +36,16 @@ export class RecipeFormComponent {
     id: ''
   };
 
-  // Check if the current ingredient fields are filled before adding a new one
-  onAddIngredient(i: number) {
-    const currentIngredient = this.recipe.ingredients[i]; 
+  ngOnInit() {
+    // Pre-populate form with existing recipe data if in edit mode
+    if (this.recipe) {
+      this.recipe = { ...this.recipe };
+    }
+  }
 
+  // Add a new ingredient field
+  onAddIngredient(i: number) {
+    const currentIngredient = this.recipe.ingredients[i];
     if (!currentIngredient.name || !currentIngredient.amount) {
       alert('Please fill in both the ingredient name and amount.');
     } else {
@@ -45,7 +53,7 @@ export class RecipeFormComponent {
     }
   }
 
-  // Function to delete a specific ingredient
+  // Delete a specific ingredient
   onDeleteIngredient(i: number) {
     if (this.recipe.ingredients.length > 1) {
       this.recipe.ingredients.splice(i, 1);
@@ -54,9 +62,9 @@ export class RecipeFormComponent {
     }
   }
 
+  // Add a new step field
   onAddStep(i: number) {
     const currentStep = this.recipe.steps[i];
-
     if (!currentStep) {
       alert('Please fill in the current step.');
     } else {
@@ -64,7 +72,7 @@ export class RecipeFormComponent {
     }
   }
 
-  // Function to onDelete a specific step
+  // Delete a specific step
   onDeleteStep(i: number) {
     if (this.recipe.steps.length > 1) {
       this.recipe.steps.splice(i, 1);
@@ -73,9 +81,9 @@ export class RecipeFormComponent {
     }
   }
 
+  // Add a new tag field
   onAddTag(i: number) {
     const currentTag = this.recipe.tags[i];
-
     if (!currentTag) {
       alert('Please fill in the current tag.');
     } else {
@@ -83,7 +91,7 @@ export class RecipeFormComponent {
     }
   }
 
-  // Function to delete a specific tag
+  // Delete a specific tag
   onDeleteTag(i: number) {
     if (this.recipe.tags.length > 1) {
       this.recipe.tags.splice(i, 1);
@@ -96,13 +104,15 @@ export class RecipeFormComponent {
     return index;
   }
 
-  // Validation and form submission logic remains the same
+  // Form submission logic with validation
   onSubmit() {
+    // Check for negative values
     if (Number(this.recipe.calories) < 0 || Number(this.recipe.serves) < 0) {
       alert('Serves and calories cannot be negative numbers.');
       return;
     }
 
+    // Validate required fields
     if (
       !this.recipe.name ||
       !this.recipe.calories ||
@@ -111,29 +121,34 @@ export class RecipeFormComponent {
       !this.recipe.cuisine ||
       !this.recipe.serves ||
       !this.recipe.timeTaken ||
-      !this.recipe.ingredients.every(ingredient => ingredient.name && ingredient.amount) || 
+      !this.recipe.ingredients.every(ingredient => ingredient.name && ingredient.amount) ||
       !this.recipe.steps.every(step => step)
     ) {
       alert('All fields except Image Path must be filled.');
       return;
     }
 
+    // Ensure tags and imgTag do not contain numbers
     const numberPattern = /\d/;
     if (this.recipe.tags.some(tag => numberPattern.test(tag)) || numberPattern.test(this.recipe.imgTag)) {
       alert('Tags and Image Tag cannot contain numbers.');
       return;
     }
 
+    // Limit description to 200 words
     const wordCount = this.recipe.description.trim().split(/\s+/).length;
     if (wordCount > 200) {
       alert('Description cannot exceed 200 words.');
       return;
     }
 
+    // Emit the recipe data
     this.recipeCreated.emit(this.recipe);
+    this.recipeUpdated.emit(this.recipe); 
     this.resetForm();
   }
 
+  // Reset form to initial state
   resetForm() {
     this.recipe = {
       name: '',
@@ -154,8 +169,8 @@ export class RecipeFormComponent {
     };
   }
 
-  onCancelAddForm(){
+  // Handle form cancellation
+  onCancelAddForm() {
     this.cancelAddForm.emit();
   }
 }
-

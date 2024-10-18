@@ -9,9 +9,15 @@
       </app-filters-tab>
     </div>
 
-    <div class="recipe-main" *ngIf="showRecipeForm">
-      <app-recipe-form [cuisines]="cuisines" (recipeCreated)="onRecipeCreated($event)"
-        (cancelAddForm)="cancelAddForm()"></app-recipe-form>
+    <div class="recipe-main" *ngIf="showRecipeForm && isEditing">
+      <app-recipe-form [cuisines]="cuisines" 
+        (recipeCreated)="onRecipeCreated($event)"
+        (cancelAddForm)="cancelAddForm()"
+        (recipeCreated)="onRecipeUpdated($event)"
+        (cancelAddForm)="cancelEdit()"
+        (recipeUpdated)="onRecipeUpdated($event)"
+        [recipe]="recipeBeingEdited"
+        ></app-recipe-form>
     </div>
 
     <div class="recipe-main" *ngIf="!showRecipeForm && !selectedRecipe">
@@ -21,8 +27,12 @@
         (recipeSelected)="onRecipeSelected($event)">
       </app-recipes-tab>
     </div>
-    <div class="recipe-main" *ngIf="selectedRecipe">
-      <app-recipe-details [recipe]="selectedRecipe" (backToRecipes)="onBackToRecipes()" (toggleFavorite)="onToggleFavorite($event)" ></app-recipe-details>
+    <div class="recipe-main" *ngIf="!showRecipeForm && selectedRecipe">
+      <app-recipe-details [recipe]="selectedRecipe" 
+      (backToRecipes)="onBackToRecipes()" 
+      (toggleFavorite)="onToggleFavorite($event)" 
+      (editRecipe)="onEditRecipe($event)">
+    </app-recipe-details>
     </div>
   </section>
 </main>

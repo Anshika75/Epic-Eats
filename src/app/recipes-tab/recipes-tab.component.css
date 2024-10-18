@@ -6,6 +6,7 @@
     place-items: center;
     grid-row-gap: 25px;
     overflow-y: scroll;
+    background: #000;
 }
 
 .fallback-content{

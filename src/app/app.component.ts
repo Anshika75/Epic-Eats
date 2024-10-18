@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeType } from './models/recipe.model';
 import { RecipeData } from './data/recipe';
 import { CuisineType } from './models/cuisine.model';
@@ -24,32 +24,64 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  recipes: RecipeType[] = RecipeData;
+export class AppComponent implements OnInit {
+  recipes: RecipeType[] = [];
   cuisines: CuisineType[] = CuisineData;
-  filteredRecipes: RecipeType[] = [...this.recipes]; 
+  filteredRecipes: RecipeType[] = []; 
   selectedCuisineTagId = ''; 
   selectedDietaryTagId = ''; 
   cuisine = 0;
   dietary = 0;
   showFavorites = false;
   showRecipeForm = false; 
-  selectedRecipe: RecipeType | null = null; // explain: selectedRecipe is a property that holds the selected recipe object. It is initialized to null.
+  selectedRecipe: RecipeType | null = null; 
+  recipeBeingEdited!: RecipeType;
+  isEditing: boolean = false; 
 
+  ngOnInit() {
+    const storedRecipes = localStorage.getItem('recipes');
+    if (storedRecipes) {
+      this.recipes = JSON.parse(storedRecipes);
+    } else {
+      this.recipes = RecipeData;
+    }
+    this.filteredRecipes = [...this.recipes];
+  }
+
+  onEditRecipe(recipe: RecipeType) {
+    this.recipeBeingEdited = recipe;
+    this.showRecipeForm = true;
+    this.isEditing = true; 
+    this.selectedRecipe = recipe;
+  }
+
+  onRecipeUpdated(updatedRecipe: RecipeType) {
+    this.showRecipeForm = false;
+    const index = this.recipes.findIndex(r => r.id === updatedRecipe.id);
+    if (index > -1) {
+      this.recipes[index] = updatedRecipe;
+      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save changes to local storage
+    }
+  } 
+
+  cancelEdit() {
+    this.showRecipeForm = false;
+    this.isEditing = false;
+  }
 
   onRecipeSelected(recipe: RecipeType) {
     this.selectedRecipe = recipe;
   }
 
-
   onBackToRecipes() {
     this.selectedRecipe = null;
   }
 
-   addRecipeForm() {
+  addRecipeForm() {
     this.showRecipeForm = true;
     this.selectedRecipe = null;
   }
+
   cancelAddForm() {
     this.showRecipeForm = false;
   }
@@ -58,6 +90,7 @@ export class AppComponent {
     this.recipes.push(newRecipe);
     this.filteredRecipes = [...this.recipes]; 
     this.showRecipeForm = false;
+    localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save to local storage
   }
 
   get favoriteCount(): number {
@@ -96,15 +129,18 @@ export class AppComponent {
   onDeleteRecipe(recipeId: any) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
     this.filterRecipes();
+    localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Update local storage
   }
 
   onToggleFavorite(recipeId: any) {
     const foundRecipe = this.recipes.find(recipe => recipe.id === recipeId);
     if (foundRecipe) {
       foundRecipe.isFavorite = !foundRecipe.isFavorite;
+      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Update local storage
     }
     this.filterRecipes();
   }
+
   toggleFavorites() {
     this.showFavorites = !this.showFavorites;
     this.filterRecipes();
