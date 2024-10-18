@@ -55,7 +55,7 @@
         <ul class="list">
             <li class="item poppins-regular" *ngFor="let ingredient of recipe?.ingredients">
                 <i class="fas fa-check"></i>
-                <span>{{ ingredient.amount }} of {{ ingredient.name }}</span>
+                <span> <b>{{ ingredient.name }}: </b> {{ ingredient.amount }}</span>
             </li>
         </ul>
     </div>
