@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
 
   onRecipeUpdated(updatedRecipe: RecipeType) {
     this.showRecipeForm = false;
+    this.isEditing = false;
     const index = this.recipes.findIndex(r => r.id === updatedRecipe.id);
     if (index > -1) {
       this.recipes[index] = { ...updatedRecipe };
