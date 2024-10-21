@@ -40,6 +40,24 @@ export class RecipeFormComponent implements OnInit {
     // Pre-populate form with existing recipe data if in edit mode
     if (this.recipe) {
       this.recipe = { ...this.recipe };
+    } else {
+      this.recipe = {
+        name: '',
+        imagePath: '',
+        calories: 0,
+        description: '',
+        type: 'veg',
+        cuisine: '',
+        ingredients: [{ name: '', amount: '' }],
+        steps: [''],
+        tags: [''],
+        date: new Date(),
+        serves: 0,
+        timeTaken: '',
+        imgTag: '',
+        isFavorite: false,
+        id: ''
+      }
     }
   }
 
@@ -144,7 +162,7 @@ export class RecipeFormComponent implements OnInit {
 
     // Emit the recipe data
     this.recipeCreated.emit(this.recipe);
-    this.recipeUpdated.emit(this.recipe); 
+    this.recipeUpdated.emit(this.recipe);
     this.resetForm();
   }
 

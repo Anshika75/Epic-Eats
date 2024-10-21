@@ -16,7 +16,7 @@
         (recipeCreated)="onRecipeUpdated($event)"
         (cancelAddForm)="cancelEdit()"
         (recipeUpdated)="onRecipeUpdated($event)"
-        [recipe]="recipeBeingEdited"
+        [recipe]="recipeBeingEdited||null"
         ></app-recipe-form>
     </div>
 
