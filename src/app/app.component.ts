@@ -39,12 +39,14 @@ export class AppComponent implements OnInit {
   isEditing: boolean = false; 
 
   ngOnInit() {
-    const storedRecipes = localStorage.getItem('recipes');
+    if(typeof(Storage) !== 'undefined') {
+      const storedRecipes = localStorage.getItem('recipes');
+    
     if (storedRecipes) {
       this.recipes = JSON.parse(storedRecipes);
     } else {
       this.recipes = RecipeData;
-    }
+    }}
     this.filteredRecipes = [...this.recipes];
   }
 
@@ -59,10 +61,13 @@ export class AppComponent implements OnInit {
     this.showRecipeForm = false;
     const index = this.recipes.findIndex(r => r.id === updatedRecipe.id);
     if (index > -1) {
-      this.recipes[index] = updatedRecipe;
-      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save changes to local storage
+      this.recipes[index] = { ...updatedRecipe };
+      this.recipes = [...this.recipes];  // Reassign array
+      this.filteredRecipes = [...this.recipes];  // Ensure filteredRecipes also gets updated
+      this.selectedRecipe = updatedRecipe;
+      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save to local storage
     }
-  } 
+  }
 
   cancelEdit() {
     this.showRecipeForm = false;
