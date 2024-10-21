@@ -9,7 +9,7 @@
       </app-filters-tab>
     </div>
 
-    <div class="recipe-main" *ngIf="showRecipeForm && isEditing">
+    <div class="recipe-main" *ngIf="showRecipeForm || isEditing">
       <app-recipe-form [cuisines]="cuisines" 
         (recipeCreated)="onRecipeCreated($event)"
         (cancelAddForm)="cancelAddForm()"
