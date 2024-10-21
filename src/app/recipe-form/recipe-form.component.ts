@@ -4,6 +4,24 @@ import { CuisineType } from '../models/cuisine.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+const DEFAULT_RECIPE: RecipeType = {
+  name: '',
+  imagePath: '',
+  calories: 0,
+  description: '',
+  type: 'veg',
+  cuisine: '',
+  ingredients: [{ name: '', amount: '' }],
+  steps: [''],
+  tags: [''],
+  date: new Date(),
+  serves: 0,
+  timeTaken: '',
+  imgTag: '',
+  isFavorite: false,
+  id: ''
+};
+
 @Component({
   selector: 'app-recipe-form',
   standalone: true,
@@ -16,48 +34,17 @@ export class RecipeFormComponent implements OnInit {
   @Output() recipeCreated = new EventEmitter<RecipeType>();
   @Output() cancelAddForm: EventEmitter<void> = new EventEmitter<void>();
   @Output() recipeUpdated = new EventEmitter<RecipeType>();
+  @Input() isEditing = false;
 
   // Initialize with a default recipe structure
-  @Input() recipe: RecipeType = {
-    name: '',
-    imagePath: '',
-    calories: 0,
-    description: '',
-    type: 'veg',
-    cuisine: '',
-    ingredients: [{ name: '', amount: '' }],
-    steps: [''],
-    tags: [''],
-    date: new Date(),
-    serves: 0,
-    timeTaken: '',
-    imgTag: '',
-    isFavorite: false,
-    id: ''
-  };
+  @Input() recipe: RecipeType = { ...DEFAULT_RECIPE };
 
   ngOnInit() {
     // Pre-populate form with existing recipe data if in edit mode
     if (this.recipe) {
       this.recipe = { ...this.recipe };
     } else {
-      this.recipe = {
-        name: '',
-        imagePath: '',
-        calories: 0,
-        description: '',
-        type: 'veg',
-        cuisine: '',
-        ingredients: [{ name: '', amount: '' }],
-        steps: [''],
-        tags: [''],
-        date: new Date(),
-        serves: 0,
-        timeTaken: '',
-        imgTag: '',
-        isFavorite: false,
-        id: ''
-      }
+      this.recipe = { ...DEFAULT_RECIPE };
     }
   }
 
@@ -161,30 +148,17 @@ export class RecipeFormComponent implements OnInit {
     }
 
     // Emit the recipe data
-    this.recipeCreated.emit(this.recipe);
-    this.recipeUpdated.emit(this.recipe);
+    if (this.isEditing) {
+      this.recipeUpdated.emit(this.recipe);
+    } else {
+      this.recipeCreated.emit(this.recipe);
+    }
     this.resetForm();
   }
 
   // Reset form to initial state
   resetForm() {
-    this.recipe = {
-      name: '',
-      imagePath: '',
-      calories: 0,
-      description: '',
-      type: 'veg',
-      cuisine: '',
-      ingredients: [{ name: '', amount: '' }],
-      steps: [''],
-      tags: [''],
-      date: new Date(),
-      serves: 0,
-      timeTaken: '',
-      imgTag: '',
-      isFavorite: false,
-      id: ''
-    };
+    this.recipe = { ...DEFAULT_RECIPE };
   }
 
   // Handle form cancellation

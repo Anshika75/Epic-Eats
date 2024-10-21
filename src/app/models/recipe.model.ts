@@ -18,3 +18,4 @@ export interface RecipeType {
     tags: string[];  // New field: an array of tags for additional categorization
     imgTag: string;  // New field: to specify the type of image
 }
+
