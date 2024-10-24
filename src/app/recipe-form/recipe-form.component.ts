@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const DEFAULT_RECIPE: RecipeType = {
   name: '',
-  imagePath: '',
+  imagePath: 'https://images.unsplash.com/photo-1469307670224-ee31d24b6b9a?w=500&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpc2h8ZW58MHx8MHx8fDA%3D',
   calories: 0,
   description: '',
   type: 'veg',
@@ -47,7 +47,7 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit() {
     this.recipeForm = this.fb.group({
       name: ['', Validators.required],
-      imagePath: [''],
+      imagePath: [DEFAULT_RECIPE.imagePath],
       calories: [0, [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
       type: ['veg', Validators.required],
@@ -55,9 +55,9 @@ export class RecipeFormComponent implements OnInit {
       ingredients: this.fb.array([this.createIngredient()]),
       steps: this.fb.array([this.fb.control('', Validators.required)]),
       tags: this.fb.array([this.fb.control('', Validators.required)]),
-      serves: [0, [Validators.required, Validators.min(0)]],
+      serves: [0, [Validators.required, Validators.min(1)]],
       timeTaken: ['', Validators.required],
-      imgTag: ['', Validators.required, Validators.pattern(/^[a-zA-Z]+$/)],
+      imgTag: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       isFavorite: [false],
       id: [''],
       date: [new Date()]
