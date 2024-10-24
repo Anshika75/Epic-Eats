@@ -1,110 +1,129 @@
-    <form class="recipe-form" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-name" class="inter-semibold">Recipe Name</label>
-                    <input type="text" id="recipe-name" class="form-control poppins-regular" [(ngModel)]="recipe.name" name="name" placeholder="Recipe Name" required>
-                </div>
-            </div>
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-image" class="inter-semibold">Image Path</label>
-                    <input type="text" id="recipe-image" class="form-control poppins-regular" [(ngModel)]="recipe.imagePath" name="imagePath" placeholder="Image Path" required>
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-calories" class="inter-semibold">Calories</label>
-                    <input type="number" id="recipe-calories" class="form-control poppins-regular" [(ngModel)]="recipe.calories" name="calories" placeholder="Calories" required>
-                </div>
-            </div>
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-serves" class="inter-semibold">Serves</label>
-                    <input type="number" id="recipe-serves" class="form-control poppins-regular" [(ngModel)]="recipe.serves" name="serves" placeholder="Serves" required>
-                </div>
-            </div>
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-time" class="inter-semibold">Time Taken</label>
-                    <input type="text" id="recipe-time" class="form-control poppins-regular" [(ngModel)]="recipe.timeTaken" name="timeTaken" placeholder="Time Taken" required>
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-description" class="inter-semibold">Description</label>
-                    <textarea id="recipe-description" class="form-control poppins-regular" [(ngModel)]="recipe.description" name="description" placeholder="Description"></textarea>
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name" class="inter-semibold">Name:</label>
+      <input id="name" formControlName="name" class="form-control poppins-regular" />
+      <div *ngIf="recipeForm.get('name') === null && recipeForm.get('name')?.touched    " class="text-danger poppins-regular">
+        Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imagePath" class="inter-semibold">Image Path:</label>
+      <input id="imagePath" formControlName="imagePath" class="form-control poppins-regular" />
+    </div>
+    <div class="form-group">
+      <label for="calories" class="inter-semibold">Calories:</label>
+      <input id="calories" formControlName="calories" type="number" class="form-control poppins-regular" />
+      <div *ngIf="recipeForm.get('calories')?.invalid && (recipeForm.get('calories')?.touched || recipeForm.get('calories')?.dirty)" class="text-danger poppins-regular">
+        Calories must be a positive number.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="inter-semibold">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control poppins-regular"></textarea>
+      <div *ngIf="recipeForm.get('description')?.invalid && (recipeForm.get('description')?.touched || recipeForm.get('description')?.dirty)" class="text-danger poppins-regular">
+        Description is required and must be less than 200 characters.
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-col">
+            <div class="form-group">
+                <label class="inter-semibold">Type</label>
+                <div class="radio-group inter-medium">
+                    <label class="radio-inline">
+                        <input type="radio" formControlName="type" value="veg" /> Veg
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" formControlName="type" value="non-veg" /> Non-Veg
+                      </label>
                 </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label class="inter-semibold">Type</label>
-                    <div class="radio-group inter-medium">
-                        <label>
-                            <input type="radio" name="type" [(ngModel)]="recipe.type" value="veg"> Veg
-                        </label>
-                        <label>
-                            <input type="radio" name="type" [(ngModel)]="recipe.type" value="non-veg"> Non-Veg
-                        </label>
-                    </div>
-                </div>
-            </div>
+    </div>
+    <div class="form-group">
+      <label for="cuisine" class="inter-semibold">Cuisine:</label>
+      <select id="cuisine" formControlName="cuisine" class="form-control poppins-regular">
+        <option value="">Select Cuisine</option>
+        <option *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
+      </select>
+      <div *ngIf="recipeForm.get('cuisine')?.invalid && (recipeForm.get('cuisine')?.touched || recipeForm.get('cuisine')?.dirty)" class="text-danger poppins-regular">
+        Cuisine is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="inter-semibold">Ingredients</label>
+      <div class="ingredient-col" formArrayName="ingredients">
+        <div class="ingredient-group" *ngFor="let ingredient of ingredients.controls; let i = index; trackBy: trackByIndex" [formGroupName]="i">
+          <input type="text" class="form-control poppins-regular" formControlName="name" placeholder="Ingredient Name" required>
+          <input type="text" class="form-control poppins-regular" formControlName="amount" placeholder="Amount" required>
+          <button *ngIf="i === ingredients.length - 1" type="button" class="btn btn-primary" (click)="onAddIngredient()">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">
+            <i class="fa fa-minus"></i>
+          </button>
+          <div *ngIf="ingredient.invalid && (ingredient.touched || ingredient.dirty)" class="text-danger poppins-regular">
+            Please fill in both the ingredient name and amount.
+          </div>
         </div>
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-cuisine" class="inter-semibold">Cuisine</label>
-                    <select id="recipe-cuisine" class="form-control poppins-regular" [(ngModel)]="recipe.cuisine" name="cuisine" placeholder="Select Cuisine">
-                        <option class="inter-semibold" value="">Select Cuisine</option>
-                        <option  class="inter-regular" *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
-
-                    </select>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="inter-semibold">Steps</label>
+      <div class="step-col" formArrayName="steps">
+        <div class="step-group" *ngFor="let step of steps.controls; let i = index; trackBy: trackByIndex">
+          <textarea class="form-control poppins-regular" [formControlName]="i" placeholder="Step" required rows="1" cols="1"></textarea>
+          <button *ngIf="i === steps.length - 1" type="button" class="btn btn-primary" (click)="onAddStep()">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onDeleteStep(i)">
+            <i class="fa fa-minus"></i>
+          </button>
+          <div *ngIf="step.invalid && (step.touched || step.dirty)" class="text-danger poppins-regular">
+            Please fill in the step description.
+          </div>
         </div>
-        <div class="form-row">
-            <div class="form-col">
-                <div class="form-group">
-                    <label for="recipe-imgtag" class="inter-semibold">Image Tag</label>
-                    <input type="text" id="recipe-imgtag" class="form-control poppins-regular" [(ngModel)]="recipe.imgTag" name="imgTag" placeholder="Image Tag" required>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="inter-semibold">Tags</label>
+      <div class="tag-col" formArrayName="tags">
+        <div class="tag-group" *ngFor="let tag of tags.controls; let i = index; trackBy: trackByIndex">
+          <input type="text" class="form-control poppins-regular" [formControlName]="i" placeholder="Tag" required>
+          <button *ngIf="i === tags.length - 1" type="button" class="btn btn-primary" (click)="onAddTag()">
+            <i class="fa fa-plus"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onDeleteTag(i)">
+            <i class="fa fa-minus"></i>
+          </button>
+          <div *ngIf="tag.invalid && (tag.touched || tag.dirty)" class="text-danger poppins-regular">
+            Please fill in the tag.
+          </div>
         </div>
-        <div class="form-group">
-            <label class="inter-semibold">Ingredients</label>
-            <div class="ingredient-group" *ngFor="let ingredient of recipe.ingredients; let i = index; trackBy: trackByIndex">
-                <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.name" name="ingredientName{{i}}" placeholder="Ingredient Name" required>
-                <input type="text" class="form-control poppins-regular" [(ngModel)]="ingredient.amount" name="ingredientAmount{{i}}" placeholder="Amount" required>
-                
-                <!-- Show '+' button only for the last row -->
-                <button *ngIf="i === recipe.ingredients.length - 1" type="button" class="btn btn-primary" (click)="onAddIngredient(i)">+</button>
-                <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">-</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="inter-semibold">Steps</label>
-            <div class="step-group" *ngFor="let step of recipe.steps; let i = index; trackBy: trackByIndex">
-                <textarea class="form-control poppins-regular" [(ngModel)]="recipe.steps[i]" name="step{{i}}" placeholder="Step" required rows="1" cols="1"></textarea>
-                <button *ngIf="i === recipe.steps.length - 1" type="button" class="btn btn-primary" (click)="onAddStep(i)">+</button>
-                <button type="button" class="btn btn-danger" (click)="onDeleteStep(i)">-</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="inter-semibold">Tags</label>
-            <div class="tag-group" *ngFor="let tag of recipe.tags; let i = index; trackBy: trackByIndex">
-                <input type="text" class="form-control poppins-regular" [(ngModel)]="recipe.tags[i]" name="tag{{i}}" placeholder="Tag" required>
-                <button *ngIf="i === recipe.tags.length - 1" type="button" class="btn btn-primary" (click)="onAddTag(i)">+</button>
-                <button type="button" class="btn btn-danger" (click)="onDeleteTag(i)">-</button>
-            </div>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary inter-semibold">{{ isEditing ? 'Update Recipe' : 'Create Recipe' }}</button>
-            <button type="button" class="btn btn-secondary inter-semibold" (click)="onCancelAddForm()">Cancel</button>
-        </div>
-    </form>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="serves" class="inter-semibold">Serves:</label>
+      <input id="serves" formControlName="serves" type="number" class="form-control poppins-regular" />
+      <div *ngIf="recipeForm.get('serves')?.invalid && (recipeForm.get('serves')?.touched || recipeForm.get('serves')?.dirty)" class="text-danger poppins-regular">
+        Serves must be a positive number.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="timeTaken" class="inter-semibold">Time Taken:</label>
+      <input id="timeTaken" formControlName="timeTaken" class="form-control poppins-regular" />
+      <div *ngIf="recipeForm.get('timeTaken')?.invalid && (recipeForm.get('timeTaken')?.touched || recipeForm.get('timeTaken')?.dirty)" class="text-danger poppins-regular">
+        Time Taken is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imgTag" class="inter-semibold">Image Tag:</label>
+      <input id="imgTag" formControlName="imgTag" class="form-control poppins-regular" />
+      <div *ngIf="recipeForm.get('imgTag')?.invalid && (recipeForm.get('imgTag')?.touched || recipeForm.get('imgTag')?.dirty)" class="text-danger poppins-regular">
+        Image Tag must contain only letters.
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary inter-semibold">{{ isEditing ? 'Edit Recipe' : 'Create Recipe' }}</button>
+      <button type="button" (click)="onCancelAddForm()" class="btn btn-secondary inter-semibold">Cancel</button>
+    </div>
+  </form>

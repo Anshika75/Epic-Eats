@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
   }
 
   onRecipeCreated(newRecipe: RecipeType) {
-    this.recipes.push(newRecipe);
+    this.recipes.unshift(newRecipe);
     this.filteredRecipes = [...this.recipes]; 
     this.showRecipeForm = false;
     localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save to local storage

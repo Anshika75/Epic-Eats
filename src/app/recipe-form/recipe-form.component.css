@@ -72,6 +72,12 @@ textarea.form-control {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.ingredient-col, .step-col, .tag-col {
+    flex: 1;
 }
 
 .btn {
@@ -118,6 +124,19 @@ textarea.form-control {
 .form-col {
     flex: 1;
     min-width: 200px;
+}
+
+input{
+    width: 100%;
+}
+
+.text-danger{
+    color: crimson;
+    font-size: 0.75rem;
+    flex:1;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
 }
 
 @media (max-width: 768px) {
