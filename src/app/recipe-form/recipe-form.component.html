@@ -2,8 +2,11 @@
     <div class="form-group">
       <label for="name" class="inter-semibold">Name:</label>
       <input id="name" formControlName="name" class="form-control poppins-regular" />
-      <div *ngIf="recipeForm.get('name')?.value === null && recipeForm.get('name')?.touched" class="text-danger poppins-regular">
+      <!-- <div *ngIf="recipeForm.get('name')?.value === null && recipeForm.get('name')?.touched" class="text-danger poppins-regular">
         Name is required.
+      </div> -->
+      <div *ngIf="recipeForm.get('name')?.hasError('required') && recipeForm.get('name')?.touched" class=" poppins-regular">
+        Name is required. 
       </div>
     </div>
     <div class="form-group">
@@ -42,7 +45,6 @@
     <div class="form-group">
       <label for="cuisine" class="inter-semibold">Cuisine:</label>
       <select id="cuisine" formControlName="cuisine" class="form-control poppins-regular">
-        <option value="">Select Cuisine</option>
         <option *ngFor="let cuisine of cuisines" [value]="cuisine.name">{{ cuisine.name }}</option>
       </select>
       <div *ngIf="recipeForm.get('cuisine')?.invalid && (recipeForm.get('cuisine')?.touched || recipeForm.get('cuisine')?.dirty)" class="text-danger poppins-regular">

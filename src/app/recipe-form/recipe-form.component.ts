@@ -4,6 +4,7 @@ import { RecipeType } from '../models/recipe.model';
 import { CuisineType } from '../models/cuisine.model';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { v4 as uuidv4 } from 'uuid';
 
 const DEFAULT_RECIPE: RecipeType = {
   name: '',
@@ -149,24 +150,6 @@ export class RecipeFormComponent implements OnInit {
     return index;
   }
 
-  onSubmit() {
-    if (this.recipeForm.invalid) {
-      this.markAllAsTouched();
-      this.displayValidationErrors();
-      return;
-    }
-
-    const recipe: RecipeType = this.recipeForm.value;
-
-    if (this.isEditing) {
-      this.recipeUpdated.emit(recipe);
-    } else {
-      recipe.date = new Date(); // Set the date to the current date when creating a new recipe
-      this.recipeCreated.emit(recipe);
-    }
-    this.resetForm();
-  }
-
   markAllAsTouched() {
     this.recipeForm.markAllAsTouched();
     this.ingredients.controls.forEach(control => control.markAsTouched());
@@ -207,6 +190,26 @@ export class RecipeFormComponent implements OnInit {
       }
     }
   }
+  
+  onSubmit() {
+    if (this.recipeForm.invalid) {
+      this.markAllAsTouched();
+      this.displayValidationErrors();
+      return;
+    }
+
+    const recipe: RecipeType = this.recipeForm.value;
+
+    if (this.isEditing) {
+      this.recipeUpdated.emit(recipe);
+    } else {
+      recipe.id = uuidv4(); // Generate a unique ID for the new recipe
+      recipe.date = new Date(); // Set the date to the current date when creating a new recipe
+      this.recipeCreated.emit(recipe);
+    }
+    this.resetForm();
+  }
+
 
   resetForm() {
     this.recipeForm.reset(DEFAULT_RECIPE);
