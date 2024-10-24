@@ -5,7 +5,7 @@
       <!-- <div *ngIf="recipeForm.get('name')?.value === null && recipeForm.get('name')?.touched" class="text-danger poppins-regular">
         Name is required.
       </div> -->
-      <div *ngIf="recipeForm.get('name')?.hasError('required') && recipeForm.get('name')?.touched" class=" poppins-regular">
+      <div *ngIf="recipeForm.get('name')?.hasError('required') && recipeForm.get('name')?.touched" class="text-danger poppins-regular">
         Name is required. 
       </div>
     </div>
