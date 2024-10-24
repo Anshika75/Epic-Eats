@@ -2,7 +2,7 @@
     <div class="form-group">
       <label for="name" class="inter-semibold">Name:</label>
       <input id="name" formControlName="name" class="form-control poppins-regular" />
-      <div *ngIf="recipeForm.get('name') === null && recipeForm.get('name')?.touched    " class="text-danger poppins-regular">
+      <div *ngIf="recipeForm.get('name')?.value === null && recipeForm.get('name')?.touched" class="text-danger poppins-regular">
         Name is required.
       </div>
     </div>

@@ -39,14 +39,16 @@ export class AppComponent implements OnInit {
   isEditing: boolean = false; 
 
   ngOnInit() {
-    if(typeof(Storage) !== 'undefined') {
+    // Load recipes from local storage or use default data if none exists
+    if (typeof(Storage) !== 'undefined') {
       const storedRecipes = localStorage.getItem('recipes');
-    
-    if (storedRecipes) {
-      this.recipes = JSON.parse(storedRecipes);
-    } else {
-      this.recipes = RecipeData;
-    }}
+      if (storedRecipes) {
+        this.recipes = JSON.parse(storedRecipes);
+      } else {
+        this.recipes = RecipeData;
+        localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save initial data
+      }
+    }
     this.filteredRecipes = [...this.recipes];
   }
 
@@ -60,13 +62,17 @@ export class AppComponent implements OnInit {
   onRecipeUpdated(updatedRecipe: RecipeType) {
     this.showRecipeForm = false;
     this.isEditing = false;
+    
+    // Find the recipe to update and replace it with the updated version
     const index = this.recipes.findIndex(r => r.id === updatedRecipe.id);
     if (index > -1) {
       this.recipes[index] = { ...updatedRecipe };
-      this.recipes = [...this.recipes];  // Reassign array
-      this.filteredRecipes = [...this.recipes];  // Ensure filteredRecipes also gets updated
+      this.recipes = [...this.recipes];  // Reassign array to trigger change detection
+      this.filteredRecipes = [...this.recipes];  // Update filtered recipes
       this.selectedRecipe = updatedRecipe;
-      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save to local storage
+
+      // Save the updated recipes array to local storage
+      localStorage.setItem('recipes', JSON.stringify(this.recipes));
     }
   }
 
@@ -93,10 +99,13 @@ export class AppComponent implements OnInit {
   }
 
   onRecipeCreated(newRecipe: RecipeType) {
+    // Add new recipe to the beginning of the array and save to local storage
     this.recipes.unshift(newRecipe);
     this.filteredRecipes = [...this.recipes]; 
     this.showRecipeForm = false;
-    localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Save to local storage
+    
+    // Save updated recipes array to local storage
+    localStorage.setItem('recipes', JSON.stringify(this.recipes));
   }
 
   get favoriteCount(): number {
@@ -135,14 +144,18 @@ export class AppComponent implements OnInit {
   onDeleteRecipe(recipeId: any) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== recipeId);
     this.filterRecipes();
-    localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Update local storage
+
+    // Update local storage after deletion
+    localStorage.setItem('recipes', JSON.stringify(this.recipes));
   }
 
   onToggleFavorite(recipeId: any) {
     const foundRecipe = this.recipes.find(recipe => recipe.id === recipeId);
     if (foundRecipe) {
       foundRecipe.isFavorite = !foundRecipe.isFavorite;
-      localStorage.setItem('recipes', JSON.stringify(this.recipes)); // Update local storage
+      
+      // Save to local storage when favorite status changes
+      localStorage.setItem('recipes', JSON.stringify(this.recipes));
     }
     this.filterRecipes();
   }
