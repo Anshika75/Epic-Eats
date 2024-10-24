@@ -48,7 +48,7 @@ export class RecipeFormComponent implements OnInit {
     this.recipeForm = this.fb.group({
       name: ['', Validators.required],
       imagePath: [''],
-      calories: [0, [Validators.required, Validators.min(0)]],
+      calories: [0, [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
       type: ['veg', Validators.required],
       cuisine: ['', Validators.required],
@@ -57,7 +57,7 @@ export class RecipeFormComponent implements OnInit {
       tags: this.fb.array([this.fb.control('', Validators.required)]),
       serves: [0, [Validators.required, Validators.min(0)]],
       timeTaken: ['', Validators.required],
-      imgTag: ['', Validators.pattern(/^\D*$/)],
+      imgTag: ['', Validators.required, Validators.pattern(/^[a-zA-Z]+$/)],
       isFavorite: [false],
       id: [''],
       date: [new Date()]
@@ -100,7 +100,7 @@ export class RecipeFormComponent implements OnInit {
     if (lastIngredient.get('name')?.value && lastIngredient.get('amount')?.value) {
       this.ingredients.push(this.createIngredient());
     } else {
-      this.validationMessage = 'Please fill in the current ingredient before adding a new one.';
+      alert(this.validationMessage = 'Please fill in the current ingredient before adding a new one.');
     }
   }
 
@@ -108,7 +108,7 @@ export class RecipeFormComponent implements OnInit {
     if (this.ingredients.length > 1) {
       this.ingredients.removeAt(i);
     } else {
-      this.validationMessage = 'You must have at least one ingredient.';
+      alert(this.validationMessage = 'You must have at least one ingredient.');
     }
   }
 
@@ -117,7 +117,7 @@ export class RecipeFormComponent implements OnInit {
     if (lastStep.value) {
       this.steps.push(this.fb.control('', Validators.required));
     } else {
-      this.validationMessage = 'Please fill in the current step before adding a new one.';
+      alert(this.validationMessage = 'Please fill in the current step before adding a new one.');
     }
   }
 
@@ -125,7 +125,7 @@ export class RecipeFormComponent implements OnInit {
     if (this.steps.length > 1) {
       this.steps.removeAt(i);
     } else {
-      this.validationMessage = 'You must have at least one step.';
+      alert(this.validationMessage = 'You must have at least one step.');
     }
   }
 
@@ -134,7 +134,7 @@ export class RecipeFormComponent implements OnInit {
     if (lastTag.value) {
       this.tags.push(this.fb.control('', Validators.required));
     } else {
-      this.validationMessage = 'Please fill in the current tag before adding a new one.';
+      alert(this.validationMessage = 'Please fill in the current tag before adding a new one.');
     }
   }
 
@@ -142,7 +142,7 @@ export class RecipeFormComponent implements OnInit {
     if (this.tags.length > 1) {
       this.tags.removeAt(i);
     } else {
-      this.validationMessage = 'You must have at least one tag.';
+      alert(this.validationMessage = 'You must have at least one tag.');
     }
   }
 
@@ -161,7 +161,7 @@ export class RecipeFormComponent implements OnInit {
     const controls = this.recipeForm.controls;
     for (const name in controls) {
       if (controls[name].invalid) {
-        this.validationMessage = `Please fill in the ${name} field correctly.`;
+        alert(this.validationMessage = `Please fill in the ${name} field correctly.`);
         return;
       }
     }
@@ -169,7 +169,7 @@ export class RecipeFormComponent implements OnInit {
     const ingredients = this.ingredients.controls;
     for (let i = 0; i < ingredients.length; i++) {
       if (ingredients[i].invalid) {
-        this.validationMessage = `Please fill in the ingredient at position ${i + 1} correctly.`;
+        alert(this.validationMessage = `Please fill in the ingredient at position ${i + 1} correctly.`);
         return;
       }
     }
@@ -177,7 +177,7 @@ export class RecipeFormComponent implements OnInit {
     const steps = this.steps.controls;
     for (let i = 0; i < steps.length; i++) {
       if (steps[i].invalid) {
-        this.validationMessage = `Please fill in the step at position ${i + 1} correctly.`;
+        alert(this.validationMessage = `Please fill in the step at position ${i + 1} correctly.`);
         return;
       }
     }
@@ -185,12 +185,12 @@ export class RecipeFormComponent implements OnInit {
     const tags = this.tags.controls;
     for (let i = 0; i < tags.length; i++) {
       if (tags[i].invalid) {
-        this.validationMessage = `Please fill in the tag at position ${i + 1} correctly.`;
+        alert(this.validationMessage = `Please fill in the tag at position ${i + 1} correctly.`);
         return;
       }
     }
   }
-  
+
   onSubmit() {
     if (this.recipeForm.invalid) {
       this.markAllAsTouched();
