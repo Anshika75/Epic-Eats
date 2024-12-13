@@ -81,7 +81,6 @@ Epic Eats is distributed under the [MIT License](LICENSE). Feel free to use, mod
 ## Contact Information
 
 For questions, feedback, or collaboration, feel free to connect:
-- **Email**: your-email@example.com
 - **GitHub**: [Anshika75](https://github.com/Anshika75)
 
 ---
